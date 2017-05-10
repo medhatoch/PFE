@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ClientCreateDlg" widgetVar="ClientCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateClientTitle}">
+            <h:form id="ClientCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="4" rendered="#{clientController.selected != null}">
+                        <p:outputLabel value="Nature" for="nature" />
+                        <p:selectOneMenu id="nature" value="#{clientController.selected.nature}">
+                            <f:selectItem itemLabel="------SELECT------" itemValue="0"/>
+                            <f:selectItem itemLabel="personne physique" itemValue="1"/>
+                            <f:selectItem itemLabel="societe" itemValue="2"/>
+                            <p:ajax update="ClientCreateForm" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateClientLabel_cin}" for="cin" rendered="#{clientController.selected.nature==1}" />
+                        <p:inputText id="cin" value="#{clientController.selected.cin}" title="#{bundle.CreateClientTitle_cin}" rendered="#{clientController.selected.nature==1}" />
+                        <p:outputLabel value="#{bundle.CreateClientLabel_numroPassport}" for="numroPassport" rendered="#{clientController.selected.nature==1}" />
+                        <p:inputText id="numroPassport" value="#{clientController.selected.numroPassport}" title="#{bundle.CreateClientTitle_numroPassport}" rendered="#{clientController.selected.nature==1}" />
+                        <p:outputLabel value="#{bundle.CreateClientLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{clientController.selected.nom}" title="#{bundle.CreateClientTitle_nom}" />
+                        <p:outputLabel value="#{bundle.CreateClientLabel_prenom}" for="prenom" rendered="#{clientController.selected.nature==1}" />
+                        <p:inputText id="prenom" value="#{clientController.selected.prenom}" title="#{bundle.CreateClientTitle_prenom}" rendered="#{clientController.selected.nature==1}" />
+                        <p:outputLabel value="#{bundle.CreateClientLabel_adresse}" for="adresse" />
+                        <p:inputText id="adresse" value="#{clientController.selected.adresse}" title="#{bundle.CreateClientTitle_adresse}" />
+                        <p:outputLabel value="#{bundle.CreateClientLabel_localite}" for="localite" />
+                        <p:inputText id="localite" value="#{clientController.selected.localite}" title="#{bundle.CreateClientTitle_localite}" />
+                        <p:outputLabel value="#{bundle.CreateClientLabel_tel}" for="tel" />
+                        <p:inputText id="tel" value="#{clientController.selected.tel}" title="#{bundle.CreateClientTitle_tel}" />
+                        <p:outputLabel value="#{bundle.CreateClientLabel_numeroPermis}" for="numeroPermis" rendered="#{clientController.selected.nature==1}" />
+                        <p:inputText id="numeroPermis" value="#{clientController.selected.numeroPermis}" title="#{bundle.CreateClientTitle_numeroPermis}" rendered="#{clientController.selected.nature==1}" />
+                        <p:outputLabel value="#{bundle.CreateClientLabel_dateNaissance}" for="dateNaissance" rendered="#{clientController.selected.nature==1}" />
+                        <p:calendar id="dateNaissance" pattern="MM/dd/yyyy" value="#{clientController.selected.dateNaissance}" title="#{bundle.EditClientTitle_dateNaissance}" rendered="#{clientController.selected.nature==1}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateClientLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{clientController.selected.email}" title="#{bundle.CreateClientTitle_email}" >
+                            <f:validator validatorId="controler.emailValidator" />
+                        </p:inputText>
+                        <p:outputLabel value="#{bundle.CreateClientLabel_fax}" for="fax" />
+                        <p:inputText id="fax" value="#{clientController.selected.fax}" title="#{bundle.CreateClientTitle_fax}" />
+                        <p:outputLabel value="#{bundle.CreateClientLabel_rc}" for="rc" rendered="#{clientController.selected.nature==2}" />
+                        <p:inputText id="rc" value="#{clientController.selected.rc}" title="#{bundle.CreateClientTitle_rc}" rendered="#{clientController.selected.nature==2}" />
+                        <p:outputLabel value="#{bundle.CreateClientLabel_password}" for="password" />
+                        <p:password id="password" value="#{clientController.selected.password}" title="#{bundle.CreateClientTitle_password}" />
+                        <p:outputLabel value="#{bundle.CreateClientLabel_dateInscription}" for="dateInscription" />
+                        <p:calendar disabled="true" id="dateInscription" pattern="dd/MM/yyyy" value="#{clientController.date}" title="#{bundle.EditClientTitle_dateInscription}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateClientLabel_pays}" for="pays" />
+                        <p:selectOneMenu id="pays" value="#{clientController.selected.pays}" >
+                            <f:selectItems value="#{paysController.itemsAvailableSelectOne}"
+                                           var="paysItem"
+                                           itemValue="#{paysItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{clientController.create}" value="#{bundle.Save}" update="display,:ClientListForm:datalist,:growl" oncomplete="handleSubmit(args,'ClientCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ClientCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

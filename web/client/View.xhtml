@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ClientViewDlg" widgetVar="ClientViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewClientTitle}">
+            <h:form id="ClientViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{clientController.selected != null}">
+                        <h:outputText value="#{bundle.ViewClientLabel_cin}"/>
+                        <h:outputText value="#{clientController.selected.cin}" title="#{bundle.ViewClientTitle_cin}"/>
+                        <h:outputText value="#{bundle.ViewClientLabel_numroPassport}"/>
+                        <h:outputText value="#{clientController.selected.numroPassport}" title="#{bundle.ViewClientTitle_numroPassport}"/>
+                        <h:outputText value="#{bundle.ViewClientLabel_nom}"/>
+                        <h:outputText value="#{clientController.selected.nom}" title="#{bundle.ViewClientTitle_nom}"/>
+                        <h:outputText value="#{bundle.ViewClientLabel_prenom}"/>
+                        <h:outputText value="#{clientController.selected.prenom}" title="#{bundle.ViewClientTitle_prenom}"/>
+                        <h:outputText value="#{bundle.ViewClientLabel_adresse}"/>
+                        <h:outputText value="#{clientController.selected.adresse}" title="#{bundle.ViewClientTitle_adresse}"/>
+                        <h:outputText value="#{bundle.ViewClientLabel_localite}"/>
+                        <h:outputText value="#{clientController.selected.localite}" title="#{bundle.ViewClientTitle_localite}"/>
+                        <h:outputText value="#{bundle.ViewClientLabel_tel}"/>
+                        <h:outputText value="#{clientController.selected.tel}" title="#{bundle.ViewClientTitle_tel}"/>
+                        <h:outputText value="#{bundle.ViewClientLabel_numeroPermis}"/>
+                        <h:outputText value="#{clientController.selected.numeroPermis}" title="#{bundle.ViewClientTitle_numeroPermis}"/>
+                        <h:outputText value="#{bundle.ViewClientLabel_dateNaissance}"/>
+                        <h:outputText value="#{clientController.selected.dateNaissance}" title="#{bundle.ViewClientTitle_dateNaissance}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewClientLabel_email}"/>
+                        <h:outputText value="#{clientController.selected.email}" title="#{bundle.ViewClientTitle_email}"/>
+                        <h:outputText value="#{bundle.ViewClientLabel_fax}"/>
+                        <h:outputText value="#{clientController.selected.fax}" title="#{bundle.ViewClientTitle_fax}"/>
+                        <h:outputText value="#{bundle.ViewClientLabel_rc}"/>
+                        <h:outputText value="#{clientController.selected.rc}" title="#{bundle.ViewClientTitle_rc}"/>
+                        <h:outputText value="#{bundle.ViewClientLabel_password}"/>
+                        <h:outputText value="#{clientController.selected.password}" title="#{bundle.ViewClientTitle_password}"/>
+                        <h:outputText value="#{bundle.ViewClientLabel_dateInscription}"/>
+                        <h:outputText value="#{clientController.selected.dateInscription}" title="#{bundle.ViewClientTitle_dateInscription}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewClientLabel_pays}"/>
+                        <h:outputText value="#{clientController.selected.pays}" title="#{bundle.ViewClientTitle_pays}"/>
+                        <h:outputText value="#{bundle.ViewClientLabel_nature}"/>
+                        <h:outputText value="#{clientController.selected.nature}" title="#{bundle.ViewClientTitle_nature}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ClientViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

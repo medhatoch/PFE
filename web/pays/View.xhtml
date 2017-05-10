@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PaysViewDlg" widgetVar="PaysViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPaysTitle}">
+            <h:form id="PaysViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{paysController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPaysLabel_code}"/>
+                        <h:outputText value="#{paysController.selected.code}" title="#{bundle.ViewPaysTitle_code}"/>
+                        <h:outputText value="#{bundle.ViewPaysLabel_abreviation1}"/>
+                        <h:outputText value="#{paysController.selected.abreviation1}" title="#{bundle.ViewPaysTitle_abreviation1}"/>
+                        <h:outputText value="#{bundle.ViewPaysLabel_abreviation2}"/>
+                        <h:outputText value="#{paysController.selected.abreviation2}" title="#{bundle.ViewPaysTitle_abreviation2}"/>
+                        <h:outputText value="#{bundle.ViewPaysLabel_nomEng}"/>
+                        <h:outputText value="#{paysController.selected.nomEng}" title="#{bundle.ViewPaysTitle_nomEng}"/>
+                        <h:outputText value="#{bundle.ViewPaysLabel_nom}"/>
+                        <h:outputText value="#{paysController.selected.nom}" title="#{bundle.ViewPaysTitle_nom}"/>
+                        <h:outputText value="#{bundle.ViewPaysLabel_id}"/>
+                        <h:outputText value="#{paysController.selected.id}" title="#{bundle.ViewPaysTitle_id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PaysViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

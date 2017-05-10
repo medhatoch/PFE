@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VehiculeCreateDlg" widgetVar="VehiculeCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateVehiculeTitle}">
+            <h:form id="VehiculeCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{vehiculeController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateVehiculeLabel_matricule}" for="matricule" />
+                        <p:inputText id="matricule" value="#{vehiculeController.selected.matricule}" title="#{bundle.CreateVehiculeTitle_matricule}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculeLabel_modele}" for="modele" />
+                        <p:inputText id="modele" value="#{vehiculeController.selected.modele}" title="#{bundle.CreateVehiculeTitle_modele}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculeLabel_marque}" for="marque" />
+                        <p:inputText id="marque" value="#{vehiculeController.selected.marque}" title="#{bundle.CreateVehiculeTitle_marque}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculeLabel_categorie}" for="categorie" />
+                        <p:inputText id="categorie" value="#{vehiculeController.selected.categorie}" title="#{bundle.CreateVehiculeTitle_categorie}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculeLabel_carburant}" for="carburant" />
+                        <p:inputText id="carburant" value="#{vehiculeController.selected.carburant}" title="#{bundle.CreateVehiculeTitle_carburant}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculeLabel_couleur}" for="couleur" />
+                        <p:inputText id="couleur" value="#{vehiculeController.selected.couleur}" title="#{bundle.CreateVehiculeTitle_couleur}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculeLabel_nombrePlace}" for="nombrePlace" />
+                        <p:inputText id="nombrePlace" value="#{vehiculeController.selected.nombrePlace}" title="#{bundle.CreateVehiculeTitle_nombrePlace}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculeLabel_km}" for="km" />
+                        <p:inputText id="km" value="#{vehiculeController.selected.km}" title="#{bundle.CreateVehiculeTitle_km}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculeLabel_prixParJour}" for="prixParJour" />
+                        <p:inputText id="prixParJour" value="#{vehiculeController.selected.prixParJour}" title="#{bundle.CreateVehiculeTitle_prixParJour}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{vehiculeController.create}" value="#{bundle.Save}" update="display,:VehiculeListForm:datalist,:growl" oncomplete="handleSubmit(args,'VehiculeCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="VehiculeCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

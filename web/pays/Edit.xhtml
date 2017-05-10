@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PaysEditDlg" widgetVar="PaysEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPaysTitle}">
+            <h:form id="PaysEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{paysController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPaysLabel_code}" for="code" />
+                        <p:inputText id="code" value="#{paysController.selected.code}" title="#{bundle.EditPaysTitle_code}" />
+                        <p:outputLabel value="#{bundle.EditPaysLabel_abreviation1}" for="abreviation1" />
+                        <p:inputText id="abreviation1" value="#{paysController.selected.abreviation1}" title="#{bundle.EditPaysTitle_abreviation1}" />
+                        <p:outputLabel value="#{bundle.EditPaysLabel_abreviation2}" for="abreviation2" />
+                        <p:inputText id="abreviation2" value="#{paysController.selected.abreviation2}" title="#{bundle.EditPaysTitle_abreviation2}" />
+                        <p:outputLabel value="#{bundle.EditPaysLabel_nomEng}" for="nomEng" />
+                        <p:inputText id="nomEng" value="#{paysController.selected.nomEng}" title="#{bundle.EditPaysTitle_nomEng}" />
+                        <p:outputLabel value="#{bundle.EditPaysLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{paysController.selected.nom}" title="#{bundle.EditPaysTitle_nom}" />
+                        <p:outputLabel value="#{bundle.EditPaysLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{paysController.selected.id}" title="#{bundle.EditPaysTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{paysController.update}" value="#{bundle.Save}" update="display,:PaysListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PaysEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PaysEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

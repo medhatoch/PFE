@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ManagerViewDlg" widgetVar="ManagerViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewManagerTitle}">
+            <h:form id="ManagerViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{managerController.selected != null}">
+                        <h:outputText value="#{bundle.ViewManagerLabel_blocked}"/>
+                        <h:outputText value="#{managerController.selected.blocked}" title="#{bundle.ViewManagerTitle_blocked}"/>
+                        <h:outputText value="#{bundle.ViewManagerLabel_nom}"/>
+                        <h:outputText value="#{managerController.selected.nom}" title="#{bundle.ViewManagerTitle_nom}"/>
+                        <h:outputText value="#{bundle.ViewManagerLabel_prenom}"/>
+                        <h:outputText value="#{managerController.selected.prenom}" title="#{bundle.ViewManagerTitle_prenom}"/>
+                        <h:outputText value="#{bundle.ViewManagerLabel_email}"/>
+                        <h:outputText value="#{managerController.selected.email}" title="#{bundle.ViewManagerTitle_email}"/>
+                        <h:outputText value="#{bundle.ViewManagerLabel_tel}"/>
+                        <h:outputText value="#{managerController.selected.tel}" title="#{bundle.ViewManagerTitle_tel}"/>
+                        <h:outputText value="#{bundle.ViewManagerLabel_password}"/>
+                        <h:outputText value="#{managerController.selected.password}" title="#{bundle.ViewManagerTitle_password}"/>
+                        <h:outputText value="#{bundle.ViewManagerLabel_login}"/>
+                        <h:outputText value="#{managerController.selected.login}" title="#{bundle.ViewManagerTitle_login}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ManagerViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
