@@ -2,24 +2,25 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
-            <link rel="stylesheet" href="css/components.css"/>
-            <link rel="stylesheet" href="css/responsee.css"/>
-            <link rel="stylesheet" href="owl-carousel/owl.carousel.css"/>
-            <link rel="stylesheet" href="owl-carousel/owl.theme.css"/>
-            <!-- CUSTOM STYLE -->  
-            <link rel="stylesheet" href="css/template-style.css"/>
-            <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'/>
-            <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
-            <script type="text/javascript" src="js/jquery-ui.min.js"></script>    
-            <script type="text/javascript" src="js/modernizr.js"></script>
-            <script type="text/javascript" src="js/responsee.js"></script>   
-            <!--[if lt IE 9]>
-                    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-              <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
-            <![endif]--> 
+        <link rel="stylesheet" href="css/components.css"/>
+        <link rel="stylesheet" href="css/responsee.css"/>
+        <link rel="stylesheet" href="owl-carousel/owl.carousel.css"/>
+        <link rel="stylesheet" href="owl-carousel/owl.theme.css"/>
+        <!-- CUSTOM STYLE -->  
+        <link rel="stylesheet" href="css/template-style.css"/>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'/>
+        <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.min.js"></script>    
+        <script type="text/javascript" src="js/modernizr.js"></script>
+        <script type="text/javascript" src="js/responsee.js"></script>   
+        <!--[if lt IE 9]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+          <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+        <![endif]--> 
     </h:head>
     <ui:include src="navbar-top.xhtml"/>
     <body class="size-1140">
@@ -28,71 +29,84 @@
         <section>
             <div id="head">
                 <div class="line">
-                    <h1>Responsive image gallery</h1>
+                    <h1>Gallerie</h1>
                 </div>
             </div>
             <div id="content">
                 <div class="line">
                     <div class="margin">
+                        <h3>Voitures disponibles</h3>
                         <div class="s-12 m-6 l-4">
-                            <img src="img/first-small.jpg"/>      
-                            <p class="subtitile">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                            </p>
+                            <p:commandLink>
+                                <img src="img/first-small.jpg" height="200" width="200" ></img>
+                                <p class="subtitile">
+                                    <img src="img/panier.jpg" style="height:50px; width:60px;"/>
+                                </p>   
+                            </p:commandLink>
                         </div>
                         <div class="s-12 m-6 l-4">
-                            <img src="img/second-small.jpg"/>      
-                            <p class="subtitile">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                            </p>
+                            <p:commandLink>
+                                <img src="img/second-small.jpg" height="200" width="200"></img>      
+                                <p class="subtitile">
+                                    <img src="img/panier.jpg" style="height:50px; width:60px;"/>
+                                </p>   
+                            </p:commandLink>
                         </div>
                         <div class="s-12 m-6 l-4">
-                            <img src="img/third-small.jpg"/>      
-                            <p class="subtitile">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                            </p>
+                            <p:commandLink>
+                                <img src="img/third-small.jpg" height="200" width="200"></img>      
+                                <p class="subtitile">
+                                    <img src="img/panier.jpg" style="height:50px; width:60px;"/>
+                                </p> 
+                            </p:commandLink>
                         </div>
                         <div class="s-12 m-6 l-4">
-                            <img src="img/fourth-small.jpg"/>      
-                            <p class="subtitile">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                            </p>
+                            <p:commandLink>
+                                <img src="img/second-small.jpg" height="200" width="200"></img>      
+                                <p class="subtitile">
+                                    <img src="img/panier.jpg" style="height:50px; width:60px;"/>
+                                </p> 
+                            </p:commandLink>
                         </div>
                         <div class="s-12 m-6 l-4">
-                            <img src="img/first-small.jpg"/>      
-                            <p class="subtitile">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                            </p>
+                            <p:commandLink>
+                                <img src="img/third-small.jpg" height="200" width="200"></img>      
+                                <p class="subtitile">
+                                    <img src="img/panier.jpg" style="height:50px; width:60px;"/>
+                                </p>  
+                            </p:commandLink>
                         </div>
                         <div class="s-12 m-6 l-4">
-                            <img src="img/second-small.jpg"/>      
-                            <p class="subtitile">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                            </p>
+                            <p:commandLink>
+                                <img src="img/first-small.jpg" height="200" width="200"/>      
+                                <p class="subtitile">
+                                    <img src="img/panier.jpg" style="height:50px; width:60px;"></img>
+                                </p>  
+                            </p:commandLink>
                         </div>
                         <div class="s-12 m-6 l-4">
-                            <img src="img/third-small.jpg"/>      
-                            <p class="subtitile">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                            </p>
+                            <p:commandLink>
+                                <img src="img/second-small.jpg" height="200" width="200"/>      
+                                <p class="subtitile">
+                                    <img src="img/panier.jpg" style="height:50px; width:60px;"/>
+                                </p>  
+                            </p:commandLink>
                         </div>
                         <div class="s-12 m-6 l-4">
-                            <img src="img/fourth-small.jpg"/>      
-                            <p class="subtitile">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                            </p>
+                            <p:commandLink>
+                                <img src="img/third-small.jpg" height="200" width="200"/>      
+                                <p class="subtitile">
+                                    <img src="img/panier.jpg" style="height:50px; width:60px;"/>
+                                </p>
+                            </p:commandLink>
                         </div>
                         <div class="s-12 m-6 l-4">
-                            <img src="img/first-small.jpg"/>      
-                            <p class="subtitile">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                            </p>
-                        </div>
-                        <div class="s-12 m-6 l-4">
-                            <img src="img/second-small.jpg"/>      
-                            <p class="subtitile">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                            </p>
-                        </div>
-                        <div class="s-12 m-6 l-4">
-                            <img src="img/third-small.jpg"/>      
-                            <p class="subtitile">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                            </p>
-                        </div>
-                        <div class="s-12 m-6 l-4">
-                            <img src="img/fourth-small.jpg"/>      
-                            <p class="subtitile">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                            </p>
+                            <p:commandLink>
+                                <img src="img/first-small.jpg" height="200" width="200"/>      
+                                <p class="subtitile btn btn-warning">
+                                    <img src="img/panier.jpg" style="height:50px; width:60px;"/>
+                                </p>
+                            </p:commandLink>
                         </div>
                     </div>
                 </div>

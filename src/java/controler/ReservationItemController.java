@@ -1,8 +1,10 @@
 package controler;
 
+import bean.Reservation;
 import bean.ReservationItem;
 import controler.util.JsfUtil;
 import controler.util.JsfUtil.PersistAction;
+import java.io.IOException;
 import service.ReservationItemFacade;
 
 import java.io.Serializable;
@@ -18,6 +20,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import net.sf.jasperreports.engine.JRException;
 
 @Named("reservationItemController")
 @SessionScoped
@@ -27,6 +30,15 @@ public class ReservationItemController implements Serializable {
     private service.ReservationItemFacade ejbFacade;
     private List<ReservationItem> items = null;
     private ReservationItem selected;
+    
+    public void generatePdf() throws JRException, IOException{
+        ejbFacade.generatePdf(selected);
+        FacesContext.getCurrentInstance().responseComplete();
+    }
+    
+    public void findItems(Reservation reservation){
+        items=ejbFacade.findItems(reservation);
+    }
 
     public ReservationItemController() {
     }

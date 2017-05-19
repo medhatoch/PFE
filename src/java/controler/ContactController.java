@@ -1,11 +1,14 @@
 package controler;
 
+import bean.Comment;
 import bean.Contact;
 import controler.util.JsfUtil;
 import controler.util.JsfUtil.PersistAction;
 import service.ContactFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -26,14 +29,43 @@ public class ContactController implements Serializable {
     @EJB
     private service.ContactFacade ejbFacade;
     private List<Contact> items = null;
+    private List<Contact> itemsFound;
     private Contact selected;
+
+    public void send() {
+        ejbFacade.create(selected);
+        JsfUtil.addSuccessMessage("merci pour votre commentaire!!!");
+    }
+
+    public void destroy(Contact contact) {
+        ejbFacade.remove(contact);
+    }
 
     public ContactController() {
     }
 
+    public void delete(Contact item) {
+        ejbFacade.remove(item);
+        if (!JsfUtil.isValidationFailed()) {
+            selected = null; // Remove selection
+            items = null;    // Invalidate list of items to trigger re-query.
+        }
+    }
+
+    public List<Contact> getItemsFound() {
+        if (itemsFound == null) {
+            itemsFound = new ArrayList<>();
+        }
+        return itemsFound;
+    }
+
+    public void setItemsFound(List<Contact> itemsFound) {
+        this.itemsFound = itemsFound;
+    }
+
     public Contact getSelected() {
-        if(selected==null){
-            selected=new Contact();
+        if (selected == null) {
+            selected = new Contact();
         }
         return selected;
     }
@@ -59,6 +91,7 @@ public class ContactController implements Serializable {
     }
 
     public void create() {
+        selected.setDateContact(new Date());
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ContactCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.

@@ -1,11 +1,10 @@
 package controler.util;
 
+
+import bean.Client;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
-import javax.xml.registry.infomodel.User;
 
 public class SessionUtil {
 
@@ -14,40 +13,19 @@ public class SessionUtil {
     private SessionUtil() {
     }
 
-    private static List<User> users = new ArrayList();
 
-//    private static boolean isConnected(User user) {
-//        if (users.stream().anyMatch((x) -> (x.getLogin().equals(user.getLogin())))) {
-//            return true;
-//        }
-//        return false;
-//    }
 
-//    public static void attachUserToCommune(User user) {
-//        Commune myCommune = user.getCommune();
-//        if (myCommune.getUsers().indexOf(user) == -1) {
-//            myCommune.getUsers().add(user);
-//        }
-//        registerUser(user);
-//    }
-//    public static void registerUser(User user) {
-//        setAttribute("user", user);
-//        if (!isConnected(user)) {
-//            users.add(user);
-//        }
-//    }
-
-    public static void unSetUser(User user) {
-        setAttribute("user", null);
-        users.remove(user);
+    public static void registerUtilisateur(Client user) {
+        setAttribute("user", user);
     }
 
-    public static User getConnectedUser() {
-        return (User) getAttribute("user");
+    public static Client getConnectedUtilisateur() {
+        return (Client) getAttribute("user");
     }
+    
+    
 
-
-
+   
     public static SessionUtil getInstance() {
         return instance;
     }

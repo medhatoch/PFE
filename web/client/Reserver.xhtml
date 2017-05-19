@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <style type="text/css">
+
+        #p_spinnerid{
+            width:8px;
+        }
+
+    </style>
+    <h:head>
+        <title>Contact page</title>
+        <link rel="stylesheet" href="#{request.contextPath}/tpl/css/components.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/tpl/css/responsee.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/tpl/owl-carousel/owl.carousel.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/tpl/owl-carousel/owl.theme.css"/>
+        <!-- CUSTOM STYLE -->  
+        <link rel="stylesheet" href="#{request.contextPath}/resources/bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/tpl/css/template-style.css"/>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'/>
+        <!--[if lt IE 9]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+          <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+        <![endif]-->
+    </h:head>
+
+    <h:body class="size-1140">
+        <!-- TOP NAV WITH LOGO -->  
+        <ui:include src="/tpl/navbar-top.xhtml"/>
+        <div class="container" style="width: 99%;">
+            <div id="content" class="left-align contact-page">
+                <div class="line">
+                    <div class="margin">
+                        <br></br>
+                        <br></br>
+                        <p:commandLink style="margin-left: 44%;"  class="btn btn-warning" value="se deconnecter" action="/index?faces-redirect=true"><i class="glyphicon glyphicon-user"></i></p:commandLink><br></br>
+                        <br></br>
+                        <h:form style="width: 90%;margin: auto;" id="form">
+
+                            <b:dataTable value="#{vehiculeController.itemsFound}" var="item">
+                                <b:dataTableColumn>
+                                    <f:facet name="header">
+                                        <h:outputText style="margin-left: 43%;" class="text-center" value="Voiture disponibles:"/>
+                                    </f:facet>
+                                    <img src="../resources/images/#{item.path}" class="img-thumbnail" alt=""/>
+                                    <div class="col-lg-4">
+                                        <h4>Marque:</h4><h:outputText class="label label-info" value="#{item.marque}"/>
+                                        <h4>Carburant:</h4> <h:outputText class="label label-warning" value="#{item.carburant}"/>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <h4>Kilometrage:</h4><h:outputText class="label label-success" value="#{item.km}"/>
+                                        <h4>Prix par jour:</h4><h:outputText class="label label-info" value="#{item.prixParJour}-DHS"/>  
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <h4>Nombre de jours:</h4>
+                                        <p:spinner id="p_spinnerid" value="#{reservationController.nbrJours}"/><br></br>
+                                        <h4>Cliquer pour reserver:</h4>
+                                        <p:commandButton rendered="#{item.etat==false}"  id="reserver" actionListener="#{reservationController.reserver(item)}" icon="fa fa-check-circle" value="Reserver"/>  
+                                    </div>
+                                </b:dataTableColumn>
+                            </b:dataTable>
+                            <p:commandButton  id="save" value="Valider" actionListener="#{reservationController.save()}"/>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+            <!-- MAP -->	
+            <div id="map-block"> 
+                <div class="col-lg-6">
+                    <iframe style="margin-right:10px;" src="https://www.google.com/maps/d/embed?mid=1q7pSsKOpfRptEqUXHaj6_GngviU" width="640" height="480"></iframe>
+                </div> 
+                <div class="col-lg-6">
+                    <h:form>
+                        <div class="s-12 l-6">
+                            <h2>Vos aviss:</h2>
+                            <div class="s-12 l-7"><p:outputLabel value="Email:"/><p:inputText value="#{commentController.selected.email}" class="form-control" placeholder="Your e-mail" title="Your e-mail" /></div><br></br>
+                            <div class="s-12"><p:outputLabel value="Comment:"/><p:inputTextarea value="#{commentController.selected.comment}" class="form-control" placeholder="Your comment" rows="5" /></div><br></br>
+                            <div class="s-12 m-6 l-4"><p:outputLabel value="envoyer:"/><p:commandLink actionListener="#{contactController.send()}" style="background: #444;color: #fff;" class="btn btn-primary form-control" value="submit"/> </div><br></br>
+                        </div>
+                    </h:form>
+                </div> 
+            </div>
+            <!-- FOOTER -->   
+            <ui:include src="/tpl/footer.xhtml"/>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    $("#reserver").click(function () {
+                        $("#reserver").hide();
+                    });
+                });
+            </script>
+        </div>
+    </h:body>
+</html>
+

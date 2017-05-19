@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:head>
+        <title>Facelet Title</title>
+        <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'/>
+        <link href="estilos.css" rel="stylesheet"/>
+    </h:head>
+    <ui:composition template="admin.xhtml">
+        <ui:define name="content">
+            <h:form>
+                <b:panel title="Comments:" look="primary">
+                    <b:dataTable id="commentTable"  style="color: #000;" value="#{commentController.itemsFound}" var="item">
+                        <b:dataTableColumn>
+                            <f:facet name="header">
+                                <h:outputText value="Nom"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nom}"/>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn>
+                            <f:facet name="header">
+                                <h:outputText value="Email"/>
+                            </f:facet>
+                            <h:outputText value="#{item.email}"/>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn>
+                            <f:facet name="header">
+                                <h:outputText value="Likes"/>
+                            </f:facet>
+                            <h:outputText value="#{item.likes}"/>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn>
+                            <f:facet name="header">
+                                <h:outputText value="Comment"/>
+                            </f:facet>
+                            <h:outputText value="#{item.comment}"/>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn>
+                            <f:facet name="header">
+                                <h:outputText value="Comment"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateComment}"/>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn>
+                            <f:facet name="header">
+                                <h:outputText value="Action"/>
+                            </f:facet>
+                            <p:commandButton update="commentTable" actionListener="#{commentController.delete(item)}" value="Supprimer"/>
+                        </b:dataTableColumn>
+                    </b:dataTable>
+                </b:panel>
+                <p:chart type="bar" model="#{reservationController.barModel}" style="height:300px"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

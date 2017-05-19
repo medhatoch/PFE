@@ -4,9 +4,11 @@ import bean.Client;
 import controler.util.HashageUtil;
 import controler.util.JsfUtil;
 import controler.util.JsfUtil.PersistAction;
+import controler.util.SessionUtil;
 import service.ClientFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -20,6 +22,9 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.BarChartModel;
 
 @Named("clientController")
 @SessionScoped
@@ -28,20 +33,95 @@ public class ClientController implements Serializable {
     @EJB
     private service.ClientFacade ejbFacade;
     private List<Client> items = null;
+    private List<Client> itemsFound;
     private Client selected;
     private Date date =new Date();
+    private Date dateMin;
+    private Date dateMax;
 
     public String seConnecte() {
         int res = ejbFacade.seConnecter(selected);
         if (res == 1) {
-            return "/reservation/List?faces-redirect=true";
+            SessionUtil.registerUtilisateur(selected);
+            System.out.println("1");
+            JsfUtil.addSuccessMessage("Vous etes connectée!!");
+            return "/client/Reserver?faces-redirect=true";
         }
-        return "/index?faces-redirect=true";
+        System.out.println("null+++++>controller");
+        JsfUtil.addErrorMessage("Mot de pass ou login incorrect!!");
+        return "/client/Login?faces-redirect=true";
     }
 
+    public void search(){
+        itemsFound=ejbFacade.search(selected);
+    }
+    
+    private BarChartModel barModel;
+
+    
+    public void init() {
+        createBarModel();
+    }
+
+    public BarChartModel getBarModel() {
+        if (barModel == null) {
+            barModel = new BarChartModel();
+        }
+        return barModel;
+    }
+
+    public void createBarModel() {
+        barModel = ejbFacade.initBarModelClient(dateMin,dateMax);
+
+        barModel.setTitle("Bar Chart");
+        barModel.setLegendPosition("ne");
+
+        Axis xAxis = barModel.getAxis(AxisType.X);
+        xAxis.setLabel("Durée");
+
+        Axis yAxis = barModel.getAxis(AxisType.Y);
+        yAxis.setLabel("Nombre");
+        yAxis.setMin(0);
+        yAxis.setMax(200);
+    }
     public ClientController() {
     }
 
+    public List<Client> getItemsFound() {
+        if (itemsFound==null) {
+            return ejbFacade.findAll();
+        }
+        return itemsFound;
+    }
+
+    public void setItemsFound(List<Client> itemsFound) {
+        this.itemsFound = itemsFound;
+    }
+
+    public Date getDateMin() {
+        if (dateMin==null) {
+            dateMin=new Date();
+        }
+        return dateMin;
+    }
+
+    public void setDateMin(Date dateMin) {
+        this.dateMin = dateMin;
+    }
+
+    public Date getDateMax() {
+         if (dateMax==null) {
+            dateMax=new Date();
+        }
+        return dateMax;
+    }
+
+    public void setDateMax(Date dateMax) {
+        this.dateMax = dateMax;
+    }
+
+    
+    
     public Date getDate() {
         return date;
     }
@@ -78,11 +158,13 @@ public class ClientController implements Serializable {
         return selected;
     }
 
-    public void create() {
+    public String create() {
+        selected.setDateInscription(new Date());
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ClientCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
+        return "/index?faces-redirect=true";
     }
 
     public void update() {
@@ -126,7 +208,6 @@ public class ClientController implements Serializable {
                         JsfUtil.addSuccessMessage("!!!!!!");
                         break;
                 }
-                JsfUtil.addSuccessMessage(successMessage);
             } catch (EJBException ex) {
                 String msg = "";
                 Throwable cause = ex.getCause();

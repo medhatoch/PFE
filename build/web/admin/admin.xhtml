@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+        <script src="js/modernizr.custom.js"></script>
+        <link rel="stylesheet" href="#{request.contextPath}/resources/bootstrap/css/bootstrap.min.css"/>
+        <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'/>
+        <link href="estilos.css" rel="stylesheet"/>
+    </h:head>
+    <h:body style="background-color: rgba(51, 122, 183, 0.6);">
+        <div id="mobile-nav"></div>
+        <h:form>
+        <nav>
+            <ul class="menu">
+                <li><p:commandLink action="/index?faces-redirect=true" value="Home" /></li>
+                <li><p:commandLink action="/manager/Login?faces-redirect=true" value="Log out" /></li>
+                <li><p:commandLink action="/admin/ReservationAdmin?faces-redirect=true" value="Reservation" /></li>
+                <li><p:commandLink action="/admin/ClientAdmin?faces-redirect=true" value="Clients" /></li>
+                <li><p:commandLink action="/admin/CommentAdmin?faces-redirect=true" value="Commentaire"/></li>
+                <li><p:commandLink action="/index?faces-redirect=true" value="Website index"/></li>
+                <li><p:commandLink action="/admin/ContactAdmin?faces-redirect=true" value="Contact"/></li>
+            </ul>
+        </nav>
+        </h:form>
+        <header>
+            <h1>Bien venue!!!!</h1>
+        </header>
+        <article>
+            <ui:insert name="content"/>
+        </article>
+        <footer><a style="background-color: #0089db;" target="target" _blank="_blank" title="Jhon Jairo Cruz"></a></footer>
+        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="mostrar_nav.js"></script>
+     <!---->
+    </h:body>
+</html>
+

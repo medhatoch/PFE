@@ -6,6 +6,7 @@
 package service;
 
 import bean.Vehicule;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,6 +20,10 @@ public class VehiculeFacade extends AbstractFacade<Vehicule> {
 
     @PersistenceContext(unitName = "PFEPU")
     private EntityManager em;
+    
+    public List<Vehicule> disponibleVehicules(){
+        return em.createQuery("SELECT v FROM Vehicule v WHERE v.etat="+0).getResultList();
+    }
 
     @Override
     protected EntityManager getEntityManager() {

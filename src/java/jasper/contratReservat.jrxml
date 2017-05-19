@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5683ce5c-2289-44c1-8cc9-c0545e59c834">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="190"/>
+	<parameter name="nom" class="java.lang.String"/>
+	<parameter name="prenom" class="java.lang.String"/>
+	<parameter name="tel" class="java.lang.Integer"/>
+	<parameter name="adresse" class="java.lang.String"/>
+	<parameter name="localite" class="java.lang.String"/>
+	<parameter name="pays" class="java.lang.String"/>
+	<parameter name="marque" class="java.lang.String"/>
+	<parameter name="matricule" class="java.lang.String"/>
+	<parameter name="modele" class="java.lang.String"/>
+	<parameter name="categorie" class="java.lang.String"/>
+	<parameter name="prixTotal" class="java.lang.String"/>
+	<parameter name="dateReservation" class="java.util.Date"/>
+	<parameter name="parameter2" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="68" splitType="Stretch">
+			<staticText>
+				<reportElement x="179" y="14" width="210" height="43" forecolor="#FF0000" uuid="a9060776-d99c-4fdf-b704-22850db8ed5b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="17" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONTRAT DE LOCATION]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="17" width="555" height="18" forecolor="#FFFFFF" backcolor="#000000" uuid="43aa8026-6bae-48fd-91f2-5dc1f606224b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="13" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[CONDUCTEUR LOCATAIRE (LE CLIENT)]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="74" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="31" y="43" width="87" height="18" forecolor="#000000" backcolor="#FFFFFF" uuid="3c3fa364-ad81-42f2-b8b7-bbd34a749d43"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="13" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Téléphone :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="31" y="25" width="87" height="18" forecolor="#000000" backcolor="#FFFFFF" uuid="eba1fb13-97f7-4949-afe9-a3add40759ec"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="13" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Prénom :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="31" y="7" width="87" height="18" forecolor="#000000" backcolor="#FFFFFF" uuid="491a3755-f039-4569-973b-b16f80ed5c00"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="13" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Nom :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="264" y="7" width="87" height="18" forecolor="#000000" backcolor="#FFFFFF" uuid="dda861e5-ce0b-46f2-bbcc-2203fd23db6a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="13" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Adresse :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="264" y="25" width="87" height="18" forecolor="#000000" backcolor="#FFFFFF" uuid="cfb1da9e-dfe5-4935-961f-ee0136fd7c03"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="13" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Localite : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="264" y="43" width="87" height="18" forecolor="#000000" backcolor="#FFFFFF" uuid="d25a8aa7-7eb6-4c2f-bb74-1ee1f091eda8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="13" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Pays :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="118" y="7" width="100" height="20" uuid="bcc939e3-b044-475e-bc4b-044508847bbc"/>
+				<textFieldExpression><![CDATA[$P{nom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="118" y="27" width="100" height="20" uuid="ec1cd1a5-db17-4501-868c-beb7284b7b13"/>
+				<textFieldExpression><![CDATA[$P{prenom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="351" y="23" width="100" height="20" uuid="84848ad9-1060-48d2-8701-8af949a346d6"/>
+				<textFieldExpression><![CDATA[$P{localite}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="351" y="43" width="100" height="20" uuid="b7609528-e993-466c-bbc2-43e965b83561"/>
+				<textFieldExpression><![CDATA[$P{pays}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="118" y="43" width="100" height="20" uuid="6018053c-91c4-4c88-a91d-92ff0aa32d0d"/>
+				<textFieldExpression><![CDATA[$P{tel}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="351" y="7" width="100" height="20" uuid="69df0c5b-822e-47af-8958-a90126056ba7"/>
+				<textFieldExpression><![CDATA[$P{adresse}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="170" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="18" forecolor="#FFFFFF" backcolor="#000000" uuid="cd277b21-651f-4d77-9c55-31fad6573b0d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="13" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[VEHICULE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="31" y="47" width="87" height="20" uuid="66365355-4ee1-411b-aebf-cd112d41db22"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Categorie :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="264" y="47" width="87" height="20" uuid="045f9ae7-0804-45ac-8b9c-9aab3c42e249"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Modele :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="31" y="27" width="87" height="20" uuid="7f04bc8a-9f48-4c13-8a47-b19ae433f4a4"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Marque :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="264" y="27" width="87" height="20" uuid="b8f3835d-5989-4095-98d5-b0a86c890f4b"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Matricule :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="79" width="555" height="18" forecolor="#FFFFFF" backcolor="#000000" uuid="038e4035-3251-4fe4-9add-0f9388bdea14"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="13" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[DATE ET PRIX]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="31" y="108" width="87" height="20" uuid="34fb2c9d-2e56-45a8-b617-625f079c6c87"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEPART]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="264" y="108" width="87" height="20" uuid="75113ffd-b50d-4819-9bb8-0d112f7c8682"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RETOUR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="118" y="139" width="143" height="20" uuid="4ed57f2f-a242-489f-a1ad-586910d2d6ed"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prix de reservation]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="118" y="47" width="100" height="20" uuid="01d2f510-1576-4c68-a1b6-56a711009b39"/>
+				<textFieldExpression><![CDATA[$P{categorie}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="118" y="27" width="100" height="20" uuid="35499315-3c6d-40fa-a69c-2f6533f2e332"/>
+				<textFieldExpression><![CDATA[$P{marque}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="351" y="47" width="100" height="20" uuid="b926390d-5798-489b-81f6-ea3ee33a8aba"/>
+				<textFieldExpression><![CDATA[$P{modele}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="351" y="27" width="100" height="20" uuid="602c53c2-faf4-4bfe-bb2d-aa2ec5478622"/>
+				<textFieldExpression><![CDATA[$P{matricule}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="261" y="139" width="100" height="20" uuid="9fcab242-393c-4dbc-913f-9bb7d5d32fef"/>
+				<textFieldExpression><![CDATA[$P{prixTotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="118" y="108" width="100" height="20" uuid="3b1b5d5e-86ab-4189-8d2d-fe684e108dd3"/>
+				<textFieldExpression><![CDATA[$P{dateReservation}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="50" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EtatLieuViewDlg" widgetVar="EtatLieuViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEtatLieuTitle}">
+            <h:form id="EtatLieuViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{etatLieuController.selected != null}">
+                        <h:outputText value="#{bundle.ViewEtatLieuLabel_prix}"/>
+                        <h:outputText value="#{etatLieuController.selected.prix}" title="#{bundle.ViewEtatLieuTitle_prix}"/>
+                        <h:outputText value="#{bundle.ViewEtatLieuLabel_dateEtatLieu}"/>
+                        <h:outputText value="#{etatLieuController.selected.dateEtatLieu}" title="#{bundle.ViewEtatLieuTitle_dateEtatLieu}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewEtatLieuLabel_reservation}"/>
+                        <h:outputText value="#{etatLieuController.selected.reservation}" title="#{bundle.ViewEtatLieuTitle_reservation}"/>
+                        <h:outputText value="#{bundle.ViewEtatLieuLabel_id}"/>
+                        <h:outputText value="#{etatLieuController.selected.id}" title="#{bundle.ViewEtatLieuTitle_id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="EtatLieuViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

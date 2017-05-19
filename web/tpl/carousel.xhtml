@@ -5,53 +5,32 @@
                 xmlns:p="http://primefaces.org/ui">
     <!-- TOP NAV WITH LOGO -->  
     <header>
-        <nav>
+        <nav style="font-size: 20px;">
             <div class="line">
                 <div class="top-nav">              
                     <div class="logo hide-l">
-                        <a href="../design/">DESIGN <br /><strong>THEME</strong></a>
                     </div>                  
-                    <p class="nav-text">Custom menu text</p>
                     <div class="top-nav s-12 l-5">
                         <ul class="right top-ul chevron">
-                            <li><a href="../design/">Home</a>
+                            <li><p:commandLink value="Home" action="/index?faces-redirect=true"/>
                             </li>
-                            <li><a href="../design/product.html">Product</a>
-                            </li>
-                            <li><a href="../design/services.html">Services</a>
+
+                            <li><p:commandLink value="Services" action="/tpl/services?faces-redirect=true"/>
                             </li>
                         </ul>
                     </div>
                     <ul class="s-12 l-2">
                         <li class="logo hide-s hide-m">
-                            <a href="../design/">DESIGN <br /><strong>THEME</strong></a>
+                            <a>CAR <br /><strong>RENTAL</strong></a>
                         </li>
                     </ul>
                     <div class="top-nav s-12 l-5">
                         <ul class="top-ul chevron">
-                            <li><a href="../design/gallery.html">Gallery</a>
+
+
+                            <li><p:commandLink value="CONTACT" action="/contact/Contact?faces-redirect=true"/>
                             </li>
-                            <li>
-                                <a>Company</a>			    
-                                <ul>
-                                    <li><a>Company 1</a>
-                                    </li>
-                                    <li><a>Company 2</a>
-                                    </li>
-                                    <li>
-                                        <a>Company 3</a>				  
-                                        <ul>
-                                            <li><a>Company 3-1</a>
-                                            </li>
-                                            <li><a>Company 3-2</a>
-                                            </li>
-                                            <li><a>Company 3-3</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a href="../design/contact.html">Contact</a>
+                            <li><p:commandLink value="Se connecter/S'inscrire" action="/client/Login?faces-redirect=true"/>
                             </li>
                         </ul> 
                     </div>
@@ -61,7 +40,7 @@
     </header>
 
     <!-- CAROUSEL -->  	
-    <div id="carousel">
+    <div id="carousel" style="width: 90%;margin: auto;">
         <div id="owl-demo" class="owl-carousel owl-theme">
             <div class="item">
                 <img src="img/first.jpg" alt=""/>      
@@ -69,10 +48,6 @@
                     <div class="line">
                         <div class="s-12 l-9">
                             <h2>Theme based on Responsee framework</h2>
-                        </div>
-                        <div class="s-12 l-9">
-                            <p>With amazing responsive carousel
-                            </p>
                         </div>
                     </div>
                 </div>
@@ -82,10 +57,10 @@
                 <div class="carousel-text">
                     <div class="line">
                         <div class="s-12 l-9">
-                            <h2>Build new layout in 10 minutes!</h2>
+                            <h2>Efficacité</h2>
                         </div>
                         <div class="s-12 l-9">
-                            <p>Lightweight, more intuitive and useful responsive CSS framework
+                            <p>Meilleur prix pour meilleur produit
                             </p>
                         </div>
                     </div>
@@ -96,11 +71,7 @@
                 <div class="carousel-text">
                     <div class="line">
                         <div class="s-12 l-9">
-                            <h2>Design theme is under the MIT license</h2>
-                        </div>
-                        <div class="s-12 l-9">
-                            <p>Best theme based on Responsee framework
-                            </p>
+                            <h2>Qualité</h2>
                         </div>
                     </div>
                 </div>

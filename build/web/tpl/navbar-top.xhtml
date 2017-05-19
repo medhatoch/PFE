@@ -9,49 +9,27 @@
                 <div class="line">
                     <div class="top-nav">              
                         <div class="logo hide-l">
-                            <a href="../design/">DESIGN <br /><strong>THEME</strong></a>
+                            <a href="../design/">CAR <br /><strong>RENTAL</strong></a>
                         </div>                  
                         <p class="nav-text">Custom menu text</p>
                         <div class="top-nav s-12 l-5">
                             <ul class="right top-ul chevron">
-                                <li><a href="../design/">Home</a>
+                                <li><p:commandLink value="Home" action="/index?faces-redirect=true"/>
                                 </li>
-                                <li><a href="../design/product.html">Product</a>
-                                </li>
-                                <li><a href="../design/services.html">Services</a>
+                                <li><p:commandLink value="Services" action="/tpl/services?faces-redirect=true"/>
                                 </li>
                             </ul>
                         </div>
                         <ul class="s-12 l-2">
                             <li class="logo hide-s hide-m">
-                                <a href="../design/">DESIGN <br /><strong>THEME</strong></a>
+                                <a>CAR <br /><strong>RENTAL</strong></a>
                             </li>
                         </ul>
                         <div class="top-nav s-12 l-5">
                             <ul class="top-ul chevron">
-                                <li><a href="../design/gallery.html">Gallery</a>
+                                <li><p:commandLink value="CONTACT" action="/contact/Contact?faces-redirect=true"/>
                                 </li>
-                                <li>
-                                    <a>Company</a>			    
-                                    <ul>
-                                        <li><a>Company 1</a>
-                                        </li>
-                                        <li><a>Company 2</a>
-                                        </li>
-                                        <li>
-                                            <a>Company 3</a>				  
-                                            <ul>
-                                                <li><a>Company 3-1</a>
-                                                </li>
-                                                <li><a>Company 3-2</a>
-                                                </li>
-                                                <li><a>Company 3-3</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><p:commandLink value="CONTACT" action="/tpl/contact"/>
+                                <li><p:commandLink value="Se connecter/S'inscrire" action="/client/Login?faces-redirect=true"/>
                                 </li>
                             </ul> 
                         </div>
@@ -60,11 +38,5 @@
             </nav>
         </header>
     </h:form>
-    <section>
-        <div id="head">
-            <div class="line">
-                <h1>Example of contact page</h1>
-            </div>
-        </div>
-    </section>
+
 </ui:composition> 

@@ -6,12 +6,14 @@
 package bean;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -26,10 +28,21 @@ public class Comment implements Serializable {
     private Long id;
     private String nom;
     private String email;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dateComment;
     private int likes;
     @Lob
     @Column(name = "COMMENT", length = 512)
     private String comment;
+
+    public Date getDateComment() {
+        return dateComment;
+    }
+
+    public void setDateComment(Date dateComment) {
+        this.dateComment = dateComment;
+    }
+    
 
     public String getNom() {
         return nom;

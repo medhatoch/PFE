@@ -4,6 +4,7 @@ import bean.Manager;
 import controler.util.HashageUtil;
 import controler.util.JsfUtil;
 import controler.util.JsfUtil.PersistAction;
+import controler.util.SessionUtilManager;
 import service.ManagerFacade;
 
 import java.io.Serializable;
@@ -35,9 +36,11 @@ public class ManagerController implements Serializable {
     public String seConnecte() {
         int res = ejbFacade.seConnecter(selected);
         if (res == 1) {
-            return "/manager/Panel?faces-redirect=true";
+            SessionUtilManager.registerUtilisateur(selected);
+            JsfUtil.addSuccessMessage("Vous etes connectée en tant que manager!!!");
+            return "/admin/ContactAdmin?faces-redirect=true";
         }
-        return "/index?faces-redirect=true";
+        return "/manager/Login?faces-redirect=true";
     }
 
     public Manager getSelected() {
@@ -76,6 +79,14 @@ public class ManagerController implements Serializable {
 
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ManagerUpdated"));
+    }
+
+    public void destroy(Manager manager) {
+        ejbFacade.remove(manager);
+        if (!JsfUtil.isValidationFailed()) {
+            selected = null; // Remove selection
+            items = null;    // Invalidate list of items to trigger re-query.
+        }
     }
 
     public void destroy() {

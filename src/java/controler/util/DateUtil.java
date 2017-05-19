@@ -7,6 +7,7 @@ package controler.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -55,4 +56,24 @@ public class DateUtil {
         return addConstraintMinMax(beanAbrev, atributeName, convert(valueMin), convert(valueMax));
     }
 
+    public static Date addDay(Date date, int days) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        c.add(Calendar.DATE, days);
+        Date newDate = c.getTime();
+        return newDate;
+    }
+
+    public static int getMonth(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int month = cal.get(Calendar.MONTH);
+        return month;
+    }
+
+    public static Date addMonth(Date date, int months) {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, months);
+        return cal.getTime();
+    }
 }

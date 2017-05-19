@@ -12,6 +12,8 @@
             <h:form id="CommentEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{commentController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditCommentLabel_dateComment}" for="dateComment" />
+                        <p:calendar id="dateComment" pattern="MM/dd/yyyy" value="#{commentController.selected.dateComment}" title="#{bundle.EditCommentTitle_dateComment}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.EditCommentLabel_nom}" for="nom" />
                         <p:inputText id="nom" value="#{commentController.selected.nom}" title="#{bundle.EditCommentTitle_nom}" />
                         <p:outputLabel value="#{bundle.EditCommentLabel_email}" for="email" />
@@ -20,8 +22,6 @@
                         <p:inputText id="likes" value="#{commentController.selected.likes}" title="#{bundle.EditCommentTitle_likes}" />
                         <p:outputLabel value="#{bundle.EditCommentLabel_comment}" for="comment" />
                         <p:inputTextarea rows="4" cols="30" id="comment" value="#{commentController.selected.comment}" title="#{bundle.EditCommentTitle_comment}" />
-                        <p:outputLabel value="#{bundle.EditCommentLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{commentController.selected.id}" title="#{bundle.EditCommentTitle_id}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{commentController.update}" value="#{bundle.Save}" update="display,:CommentListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CommentEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="CommentEditDialog.hide()"/>

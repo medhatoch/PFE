@@ -12,6 +12,8 @@
             <h:form id="VehiculeViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{vehiculeController.selected != null}">
+                        <h:outputText value="#{bundle.ViewVehiculeLabel_path}"/>
+                        <h:outputText value="#{vehiculeController.selected.path}" title="#{bundle.ViewVehiculeTitle_path}"/>
                         <h:outputText value="#{bundle.ViewVehiculeLabel_matricule}"/>
                         <h:outputText value="#{vehiculeController.selected.matricule}" title="#{bundle.ViewVehiculeTitle_matricule}"/>
                         <h:outputText value="#{bundle.ViewVehiculeLabel_modele}"/>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/index.xhtml">
+        <ui:define name="content">
+            <h:form id="ClientCreateForm" style="width: 80%;margin: auto; background-color: #ffffff;">
+                <p:panelGrid columns="4">
+                    <p:outputLabel value="Nature" for="nature" />
+                    <h:selectOneMenu class="form-control" id="nature" value="#{clientController.selected.nature}">
+                        <f:selectItem itemLabel="------SELECT------" itemValue="0"/>
+                        <f:selectItem itemLabel="personne physique" itemValue="1"/>
+                        <f:selectItem itemLabel="societe" itemValue="2"/>
+                        <p:ajax update="ClientCreateForm" />
+                    </h:selectOneMenu>
+                    <p:outputLabel value="#{bundle.CreateClientLabel_cin}" for="cin" rendered="#{clientController.selected.nature==1}" />
+                    <p:inputText class="form-control"  id="cin" value="#{clientController.selected.cin}" title="#{bundle.CreateClientTitle_cin}" rendered="#{clientController.selected.nature==1}" />
+                    <p:outputLabel value="#{bundle.CreateClientLabel_numroPassport}" for="numroPassport" rendered="#{clientController.selected.nature==1}" />
+                    <p:inputText class="form-control"  id="numroPassport" value="#{clientController.selected.numroPassport}" title="#{bundle.CreateClientTitle_numroPassport}" rendered="#{clientController.selected.nature==1}" />
+                    <p:outputLabel value="#{bundle.CreateClientLabel_nom}" for="nom" />
+                    <p:inputText class="form-control"  id="nom" value="#{clientController.selected.nom}" title="#{bundle.CreateClientTitle_nom}" />
+                    <p:outputLabel value="#{bundle.CreateClientLabel_prenom}" for="prenom" rendered="#{clientController.selected.nature==1}" />
+                    <p:inputText class="form-control"  id="prenom" value="#{clientController.selected.prenom}" title="#{bundle.CreateClientTitle_prenom}" rendered="#{clientController.selected.nature==1}" />
+                    <p:outputLabel value="#{bundle.CreateClientLabel_adresse}" for="adresse" />
+                    <p:inputText class="form-control"  id="adresse" value="#{clientController.selected.adresse}" title="#{bundle.CreateClientTitle_adresse}" />
+                    <p:outputLabel value="#{bundle.CreateClientLabel_localite}" for="localite" />
+                    <p:inputText class="form-control"  id="localite" value="#{clientController.selected.localite}" title="#{bundle.CreateClientTitle_localite}" />
+                    <p:outputLabel value="#{bundle.CreateClientLabel_tel}" for="tel" />
+                    <p:inputText class="form-control"  id="tel" value="#{clientController.selected.tel}" title="#{bundle.CreateClientTitle_tel}" />
+                    <p:outputLabel value="#{bundle.CreateClientLabel_numeroPermis}" for="numeroPermis" rendered="#{clientController.selected.nature==1}" />
+                    <p:inputText class="form-control"  id="numeroPermis" value="#{clientController.selected.numeroPermis}" title="#{bundle.CreateClientTitle_numeroPermis}" rendered="#{clientController.selected.nature==1}" />
+                    <p:outputLabel value="#{bundle.CreateClientLabel_dateNaissance}" for="dateNaissance" rendered="#{clientController.selected.nature==1}" />
+                    <p:calendar class="form-control"  id="dateNaissance" pattern="MM/dd/yyyy" value="#{clientController.selected.dateNaissance}" title="#{bundle.EditClientTitle_dateNaissance}" rendered="#{clientController.selected.nature==1}"  showOn="button"/>
+                    <p:outputLabel value="#{bundle.CreateClientLabel_email}" for="email" />
+                    <p:inputText class="form-control"  id="email" value="#{clientController.selected.email}" title="#{bundle.CreateClientTitle_email}" >
+                        <f:validator validatorId="controler.emailValidator" />
+                    </p:inputText>
+                    <p:outputLabel value="#{bundle.CreateClientLabel_fax}" for="fax" />
+                    <p:inputText class="form-control"  id="fax" value="#{clientController.selected.fax}" title="#{bundle.CreateClientTitle_fax}" />
+                    <p:outputLabel value="#{bundle.CreateClientLabel_rc}" for="rc" rendered="#{clientController.selected.nature==2}" />
+                    <p:inputText class="form-control"  id="rc" value="#{clientController.selected.rc}" title="#{bundle.CreateClientTitle_rc}" rendered="#{clientController.selected.nature==2}" />
+                    <p:outputLabel value="#{bundle.CreateClientLabel_password}" for="password" />
+                    <p:password class="form-control"  id="password" value="#{clientController.selected.password}" title="#{bundle.CreateClientTitle_password}" />
+                    <p:outputLabel value="#{bundle.CreateClientLabel_dateInscription}" for="dateInscription" />
+                    <p:calendar class="form-control"  disabled="true" id="dateInscription" pattern="dd/MM/yyyy" value="#{clientController.date}" title="#{bundle.EditClientTitle_dateInscription}"  showOn="button"/>
+                    <p:outputLabel value="#{bundle.CreateClientLabel_pays}" for="pays" />
+                    <h:selectOneMenu class="form-control"  id="pays" value="#{clientController.selected.pays}" >
+                        <f:selectItems value="#{paysController.itemsAvailableSelectOne}"
+                                       var="paysItem"
+                                       itemValue="#{paysItem}"/>
+                    </h:selectOneMenu>
+                </p:panelGrid>
+                <p:commandButton style="margin-left: 45%;width: 100px;height:40px;margin-bottom: 20px;" action="#{clientController.create}" value="Créer un compte"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

@@ -6,6 +6,7 @@ import controler.util.JsfUtil.PersistAction;
 import service.VehiculeFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -26,12 +27,25 @@ public class VehiculeController implements Serializable {
     @EJB
     private service.VehiculeFacade ejbFacade;
     private List<Vehicule> items = null;
+    private List<Vehicule> itemsFound;
     private Vehicule selected;
 
+  
     public VehiculeController() {
     }
 
+    public List<Vehicule> getItemsFound() {
+        return ejbFacade.disponibleVehicules();
+    }
+
+    public void setItemsFound(List<Vehicule> itemsFound) {
+        this.itemsFound = itemsFound;
+    }
+
     public Vehicule getSelected() {
+        if (selected == null) {
+            selected = new Vehicule();
+        }
         return selected;
     }
 

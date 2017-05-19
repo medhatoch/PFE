@@ -8,8 +8,6 @@ package bean;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -18,7 +16,6 @@ import javax.persistence.Id;
  */
 @Entity
 public class Vehicule implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     private String matricule;
@@ -28,12 +25,19 @@ public class Vehicule implements Serializable {
     private String carburant;
     private String couleur;
     private int nombrePlace;
-    private Long km;
+    private Long km=0L;
     private boolean etat;
-    private Double prixParJour;
-    
-    
+    private Double prixParJour=0D;
+    private String path;
 
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+    
     public String getMatricule() {
         return matricule;
     }

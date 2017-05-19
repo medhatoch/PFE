@@ -12,14 +12,12 @@
             <h:form id="ReservationItemViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{reservationItemController.selected != null}">
+                        <h:outputText value="#{bundle.ViewReservationItemLabel_nbrJours}"/>
+                        <h:outputText value="#{reservationItemController.selected.nbrJours}" title="#{bundle.ViewReservationItemTitle_nbrJours}"/>
                         <h:outputText value="#{bundle.ViewReservationItemLabel_vehicule}"/>
                         <h:outputText value="#{reservationItemController.selected.vehicule}" title="#{bundle.ViewReservationItemTitle_vehicule}"/>
                         <h:outputText value="#{bundle.ViewReservationItemLabel_prixReservation}"/>
                         <h:outputText value="#{reservationItemController.selected.prixReservation}" title="#{bundle.ViewReservationItemTitle_prixReservation}"/>
-                        <h:outputText value="#{bundle.ViewReservationItemLabel_dateRetour}"/>
-                        <h:outputText value="#{reservationItemController.selected.dateRetour}" title="#{bundle.ViewReservationItemTitle_dateRetour}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
                         <h:outputText value="#{bundle.ViewReservationItemLabel_reservation}"/>
                         <h:outputText value="#{reservationItemController.selected.reservation}" title="#{bundle.ViewReservationItemTitle_reservation}"/>
                         <h:outputText value="#{bundle.ViewReservationItemLabel_id}"/>

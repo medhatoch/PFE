@@ -12,6 +12,8 @@
             <h:form id="VehiculeCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{vehiculeController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateVehiculeLabel_path}" for="path" />
+                        <p:inputText id="path" value="#{vehiculeController.selected.path}" title="#{bundle.CreateVehiculeTitle_path}" />
                         <p:outputLabel value="#{bundle.CreateVehiculeLabel_matricule}" for="matricule" />
                         <p:inputText id="matricule" value="#{vehiculeController.selected.matricule}" title="#{bundle.CreateVehiculeTitle_matricule}" />
                         <p:outputLabel value="#{bundle.CreateVehiculeLabel_modele}" for="modele" />

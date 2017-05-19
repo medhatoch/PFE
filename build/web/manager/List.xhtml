@@ -14,69 +14,70 @@
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="ManagerListForm">
-                <p:panel header="#{bundle.ListManagerTitle}">
-                    <p:dataTable id="datalist" value="#{managerController.items}" var="item"
-                                 selectionMode="single" selection="#{managerController.selected}"
-                                 paginator="true"
-                                 rowKey="#{item.login}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
-                                 >
+            <h:form id="ManagerListForm" style="margin: 20px;">
+                <br></br>
+                <br></br>
+                <h2>Manager:</h2>
+                <p:dataTable id="datalist" value="#{managerController.items}" var="item" style="margin: 20px;"
+                             selectionMode="single" selection="#{managerController.selected}"
+                             paginator="true"
+                             rowKey="#{item.login}"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             >
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                    <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                    <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListManagerTitle_blocked}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.blocked}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListManagerTitle_nom}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.nom}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListManagerTitle_prenom}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.prenom}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListManagerTitle_email}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.email}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListManagerTitle_tel}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.tel}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListManagerTitle_password}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.password}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListManagerTitle_login}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.login}"/>
-                        </p:column>
-                        <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{managerController.prepareCreate}" update=":ManagerCreateForm" oncomplete="PF('ManagerCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ManagerViewForm" oncomplete="PF('ManagerViewDialog').show()" disabled="#{empty managerController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ManagerEditForm" oncomplete="PF('ManagerEditDialog').show()" disabled="#{empty managerController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{managerController.destroy}" update=":growl,datalist" disabled="#{empty managerController.selected}"/>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListManagerTitle_blocked}"/>
                         </f:facet>
-                    </p:dataTable>
-                </p:panel>
+                        <h:outputText value="#{item.blocked}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListManagerTitle_nom}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nom}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListManagerTitle_prenom}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.prenom}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListManagerTitle_email}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.email}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListManagerTitle_tel}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.tel}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListManagerTitle_login}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.login}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Action"/>
+                        </f:facet>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ManagerViewForm" oncomplete="PF('ManagerViewDialog').show()"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ManagerEditForm" oncomplete="PF('ManagerEditDialog').show()"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{managerController.destroy(item)}" update=":growl,datalist"/>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{managerController.prepareCreate}" update=":ManagerCreateForm" oncomplete="PF('ManagerCreateDialog').show()"/>
+
+                    </f:facet>
+                </p:dataTable>
             </h:form>
 
             <ui:include src="Create.xhtml"/>

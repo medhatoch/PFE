@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EtatLieuEditDlg" widgetVar="EtatLieuEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditEtatLieuTitle}">
+            <h:form id="EtatLieuEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{etatLieuController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditEtatLieuLabel_prix}" for="prix" />
+                        <p:inputText id="prix" value="#{etatLieuController.selected.prix}" title="#{bundle.EditEtatLieuTitle_prix}" />
+                        <p:outputLabel value="#{bundle.EditEtatLieuLabel_dateEtatLieu}" for="dateEtatLieu" />
+                        <p:calendar id="dateEtatLieu" pattern="MM/dd/yyyy" value="#{etatLieuController.selected.dateEtatLieu}" title="#{bundle.EditEtatLieuTitle_dateEtatLieu}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditEtatLieuLabel_reservation}" for="reservation" />
+                        <p:selectOneMenu id="reservation" value="#{etatLieuController.selected.reservation}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{reservationController.itemsAvailableSelectOne}"
+                                           var="reservationItem"
+                                           itemValue="#{reservationItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditEtatLieuLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{etatLieuController.selected.id}" title="#{bundle.EditEtatLieuTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{etatLieuController.update}" value="#{bundle.Save}" update="display,:EtatLieuListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EtatLieuEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EtatLieuEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

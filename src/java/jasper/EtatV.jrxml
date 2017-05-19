@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="18ab24c9-8de0-4925-8b85-aa55694e45fb">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="13"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="0" width="555" height="18" forecolor="#000000" backcolor="#FFFFFF" uuid="3f184ef1-e70c-4961-91e8-4f1ba810a3fd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="13" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[ETAT DE LA CARROSERIE]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="12" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="3" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="467" splitType="Stretch">
+			<image>
+				<reportElement x="142" y="22" width="287" height="150" uuid="3e56d841-42a5-4f2e-8cc4-ff46f44a0914"/>
+				<imageExpression><![CDATA["C:\\Users\\lenovo\\Desktop\\PFE\\src\\java\\image\\111.PNG"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="142" y="136" width="287" height="177" uuid="1b7397c3-05fd-4424-ae72-e27f6aa29471"/>
+				<imageExpression><![CDATA["C:\\Users\\lenovo\\Desktop\\PFE\\src\\java\\image\\222.PNG"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="20" y="339" width="409" height="0" uuid="4c320874-89d2-4bb2-b1e6-bb1adf0f2ce6"/>
+				<imageExpression><![CDATA["C:\\Users\\lenovo\\Desktop\\PFE\\src\\java\\image\\333.PNG"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="142" y="246" width="287" height="221" uuid="d543c01a-4db6-44b1-bdec-bce55eb2da53"/>
+				<imageExpression><![CDATA["C:\\Users\\lenovo\\Desktop\\PFE\\src\\java\\image\\333.PNG"]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -29,6 +29,12 @@
 
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculeTitle_path}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.path}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListVehiculeTitle_matricule}"/>
                             </f:facet>
                             <h:outputText value="#{item.matricule}"/>
@@ -89,6 +95,54 @@
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
+            </h:form>
+
+            <h:form id="form">
+                <p:dataGrid var="car" value="#{dataGridView.cars}" columns="3" layout="grid"
+                            rows="12" paginator="true" id="cars"
+                            paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                            rowsPerPageTemplate="6,12,16">
+
+                    <f:facet name="header">
+                        Cars for Sale
+                    </f:facet>
+
+                    <p:panel header="#{car.modele}" style="text-align:center">
+                        <h:panelGrid columns="1" style="width:100%">
+                            <p:graphicImage name="../resources/images/#{car.path}"/> 
+
+                            <h:outputText value="#{car.modele}" />
+
+                            <p:commandLink update=":form:carDetail" oncomplete="PF('carDialog').show()" title="View Detail">
+                                <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />
+                                <f:setPropertyActionListener value="#{car}" target="#{dataGridView.selectedCar}" />
+                            </p:commandLink>
+                        </h:panelGrid>
+                    </p:panel>
+
+                </p:dataGrid>
+
+                <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                    <p:outputPanel id="carDetail" style="text-align:center;">
+                        <p:panelGrid  columns="2" rendered="#{not empty dataGridView.selectedCar}" columnClasses="label,value">
+                            <f:facet name="header">
+                                <p:graphicImage name="../resources/images/#{dataGridView.selectedCar.path}"/> 
+                            </f:facet>
+
+                            <h:outputText value="Carburant:" />
+                            <h:outputText value="#{dataGridView.selectedCar.carburant}" />
+
+                            <h:outputText value="Year" />
+                            <h:outputText value="#{dataGridView.selectedCar.categorie}" />
+
+                            <h:outputText value="KM" />
+                            <h:outputText value="#{dataGridView.selectedCar.km}" style="color:#{dataGridView.selectedCar.couleur}"/>
+
+                            <h:outputText value="Price" />
+                            <h:outputText value="$#{dataGridView.selectedCar.prixParJour}" />
+                        </p:panelGrid>
+                    </p:outputPanel>
+                </p:dialog>
             </h:form>
 
             <ui:include src="Create.xhtml"/>

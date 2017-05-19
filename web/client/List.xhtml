@@ -103,12 +103,6 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListClientTitle_password}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.password}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListClientTitle_dateInscription}"/>
                             </f:facet>
                             <h:outputText value="#{item.dateInscription}">
@@ -125,7 +119,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListClientTitle_nature}"/>
                             </f:facet>
-                            <h:outputText value="#{item.nature}"/>
+                            <h:outputText value="#{item.nature==1?'Personne':'Societé'}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{clientController.prepareCreate}" update=":ClientCreateForm" oncomplete="PF('ClientCreateDialog').show()"/>

@@ -28,13 +28,35 @@ public class ReservationItem implements Serializable {
     private Long id;
     @OneToOne
     private Vehicule vehicule;
-    private Double prixReservation;
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date dateRetour;
+    private Double prixReservation=0D;
+    private int nbrJours;
     @ManyToOne
     private Reservation reservation;
+    @OneToOne
+    private EtatLieu etatLieu;
 
+    public EtatLieu getEtatLieu() {
+        return etatLieu;
+    }
+
+    public void setEtatLieu(EtatLieu etatLieu) {
+        this.etatLieu = etatLieu;
+    }
+    
+
+    public int getNbrJours() {
+        return nbrJours;
+    }
+
+    public void setNbrJours(int nbrJours) {
+        this.nbrJours = nbrJours;
+    }
+
+    
     public Vehicule getVehicule() {
+        if (vehicule==null) {
+            vehicule=new Vehicule();
+        }
         return vehicule;
     }
 
@@ -50,15 +72,10 @@ public class ReservationItem implements Serializable {
         this.prixReservation = prixReservation;
     }
 
-    public Date getDateRetour() {
-        return dateRetour;
-    }
-
-    public void setDateRetour(Date dateRetour) {
-        this.dateRetour = dateRetour;
-    }
-
     public Reservation getReservation() {
+        if(reservation==null){
+            reservation=new Reservation();
+        }
         return reservation;
     }
 

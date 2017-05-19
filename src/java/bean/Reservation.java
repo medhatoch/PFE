@@ -31,7 +31,7 @@ public class Reservation implements Serializable {
     @OneToMany(mappedBy = "reservation")
     private List<ReservationItem> reservationItems;
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date dateReservation;
+    private Date dateReservation=new Date();
     @ManyToOne
     private Manager manager;
     @OneToOne
@@ -55,6 +55,9 @@ public class Reservation implements Serializable {
     }
 
     public Manager getManager() {
+        if (manager==null) {
+            manager=new Manager();
+        }
         return manager;
     }
 

@@ -12,6 +12,8 @@
             <h:form id="ReservationItemEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{reservationItemController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditReservationItemLabel_nbrJours}" for="nbrJours" />
+                        <p:inputText id="nbrJours" value="#{reservationItemController.selected.nbrJours}" title="#{bundle.EditReservationItemTitle_nbrJours}" />
                         <p:outputLabel value="#{bundle.EditReservationItemLabel_vehicule}" for="vehicule" />
                         <p:selectOneMenu id="vehicule" value="#{reservationItemController.selected.vehicule}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
@@ -21,8 +23,6 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditReservationItemLabel_prixReservation}" for="prixReservation" />
                         <p:inputText id="prixReservation" value="#{reservationItemController.selected.prixReservation}" title="#{bundle.EditReservationItemTitle_prixReservation}" />
-                        <p:outputLabel value="#{bundle.EditReservationItemLabel_dateRetour}" for="dateRetour" />
-                        <p:calendar id="dateRetour" pattern="MM/dd/yyyy" value="#{reservationItemController.selected.dateRetour}" title="#{bundle.EditReservationItemTitle_dateRetour}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.EditReservationItemLabel_reservation}" for="reservation" />
                         <p:selectOneMenu id="reservation" value="#{reservationItemController.selected.reservation}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>

@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:head>
+        <title>Facelet Title</title>
+        <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'/>
+        <link href="estilos.css" rel="stylesheet"/>
+    </h:head>
+    <ui:composition template="admin.xhtml">
+        <ui:define name="content">
+            <h:form>
+                <b:panel title="Rechercher:" look="primary">
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="DateReservation:" for="dateReservation" />
+                        <p:inputText id="dateReservation" value="#{reservationController.selected.dateReservation}" title="DateReservation" >
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </p:inputText>
+                        <p:outputLabel value="PrixTotal MIN:" for="prixTotalmin" />
+                        <p:inputText id="prixTotalmin" value="#{reservationController.prixMin}"/>
+                        <p:outputLabel value="PrixTotal MAX:" for="prixTotalmax" />
+                        <p:inputText id="prixTotalmax" value="#{reservationController.prixMax}"/>
+                        <p:outputLabel value="Date Min:" for="dateMin" />
+                        <p:calendar pattern="dd/MM/yyyy" id="dateMin" value="#{reservationController.dateMin}"/>
+                        <p:outputLabel value="Date Max:" for="dateMax" />
+                        <p:calendar pattern="dd/MM/yyyy" id="dateMax" value="#{reservationController.dateMax}"/>
+                    </p:panelGrid>
+                </b:panel>
+            </h:form>
+
+            <h:form id="FormReservation">
+                <b:panel title="Reservations:" look="primary">
+                    <b:dataTable id="reservation" style="color: #000;" value="#{reservationController.itemsFound}" var="item">
+                        <b:dataTableColumn>
+                            <f:facet name="header">
+                                <h:outputText value="DateReservation"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateReservation}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn>
+                            <f:facet name="header">
+                                <h:outputText value="Manager"/>
+                            </f:facet>
+                            <h:outputText value="#{item.manager}"/>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn>
+                            <f:facet name="header">
+                                <h:outputText value="Client"/>
+                            </f:facet>
+                            <h:outputText value="#{item.client}"/>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn>
+                            <f:facet name="header">
+                                <h:outputText value="PrixTotal"/>
+                            </f:facet>
+                            <h:outputText value="#{item.prixTotal}"/>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn>
+                            <f:facet name="header">
+                                <h:outputText value="PrixTotal"/>
+                            </f:facet>
+                            <p:commandButton value="Detail" actionListener="#{reservationController.findItems()}" update=":ReservationItemListForm:reservationItem"/>
+                            <p:commandButton value="print 'jasper!!'" />
+                        </b:dataTableColumn>
+                    </b:dataTable>
+                </b:panel>
+            </h:form>
+
+            <!--RESERVATION ITEM TABLE-->
+            <h:form id="ReservationItemListForm">
+                <b:panel title="Detail:" look="primary">
+                    <b:dataTable id="reservationItem" style="color: #000;" value="#{reservationController.selected.reservationItems}" var="item">
+                        <b:dataTableColumn>
+                            <f:facet name="header">
+                                <h:outputText value="Vehicule"/>
+                            </f:facet>
+                            <h:outputText value="#{item.vehicule}"/>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn>
+                            <f:facet name="header">
+                                <h:outputText value="PrixReservation"/>
+                            </f:facet>
+                            <h:outputText value="#{item.prixReservation}"/>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn>
+                            <f:facet name="header">
+                                <h:outputText value="DateRetour"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateRetour}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </b:dataTableColumn>
+                    </b:dataTable>
+                </b:panel>
+                
+                <b:panel look="primary">
+                    <p:commandButton actionListener="#{reservationController.init()}" value="create chart"/>
+                    <p:chart type="bar" model="#{reservationController.barModel}" style="height:300px"/>
+                </b:panel>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+</html>
+
+
+

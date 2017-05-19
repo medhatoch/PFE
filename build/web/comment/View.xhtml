@@ -12,6 +12,10 @@
             <h:form id="CommentViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{commentController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCommentLabel_dateComment}"/>
+                        <h:outputText value="#{commentController.selected.dateComment}" title="#{bundle.ViewCommentTitle_dateComment}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
                         <h:outputText value="#{bundle.ViewCommentLabel_nom}"/>
                         <h:outputText value="#{commentController.selected.nom}" title="#{bundle.ViewCommentTitle_nom}"/>
                         <h:outputText value="#{bundle.ViewCommentLabel_email}"/>
@@ -20,8 +24,6 @@
                         <h:outputText value="#{commentController.selected.likes}" title="#{bundle.ViewCommentTitle_likes}"/>
                         <h:outputText value="#{bundle.ViewCommentLabel_comment}"/>
                         <h:outputText value="#{commentController.selected.comment}" title="#{bundle.ViewCommentTitle_comment}"/>
-                        <h:outputText value="#{bundle.ViewCommentLabel_id}"/>
-                        <h:outputText value="#{commentController.selected.id}" title="#{bundle.ViewCommentTitle_id}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="CommentViewDialog.hide()"/>
                 </h:panelGroup>

@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <ui:composition template="admin.xhtml">
+        <ui:define name="content">
+            <h:form>
+                <b:panel title="RECHERCHER" look="primary">
+                    <p:panelGrid columns="4">
+                        <p:outputLabel value="Cin:" for="cin" />
+                        <p:inputText id="cin" value="#{clientController.selected.cin}" title="Cin" />
+                        <p:outputLabel value="NumroPassport:" for="numroPassport" />
+                        <p:inputText id="numroPassport" value="#{clientController.selected.numroPassport}" title="NumroPassport" />
+                        <p:outputLabel value="Nom:" for="nom" />
+                        <p:inputText id="nom" value="#{clientController.selected.nom}" title="Nom" />
+                        <p:outputLabel value="Prenom:" for="prenom" />
+                        <p:inputText id="prenom" value="#{clientController.selected.prenom}" title="Prenom" />
+                        <p:outputLabel value="Email:" for="email" />
+                        <p:inputText id="email" value="#{clientController.selected.email}" title="Email" />
+                        <p:outputLabel value="Rc:" for="rc" />
+                        <p:inputText id="rc" value="#{clientController.selected.rc}" title="Rc" />
+                    </p:panelGrid>
+                    <br></br>
+                    <p:commandButton style="margin-left:550px;" value="search" actionListener="#{clientController.search()}" update="clients"/>
+                </b:panel>
+                <b:panel title="Items found" look="primary">
+                    <b:dataTable id="clients" value="#{clientController.itemsFound}" var="item" style="color: #000;">
+                        <b:dataTableColumn rendered="#{item.nature==1}">
+                            <f:facet name="header">
+                                <h:outputText value="Cin"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cin}"/>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn rendered="#{item.nature==1}">
+                            <f:facet name="header">
+                                <h:outputText value="NumroPassport"/>
+                            </f:facet>
+                            <h:outputText value="#{item.numroPassport}" />
+                        </b:dataTableColumn>
+                        <b:dataTableColumn>
+                            <f:facet name="header">
+                                <h:outputText value="Nom et Prenom"/>
+                            </f:facet>
+                            <h:outputLabel value="Nom:" class="label label-info"/><br></br>
+                            <h:outputText value="#{item.nom}"/><br></br>
+                            <h:outputLabel value="Prenom:" class="label label-info" rendered="#{item.nature==1}"/><br></br>
+                            <h:outputText value="#{item.prenom}"/>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn>
+                            <f:facet name="header">
+                                <h:outputText value="Adresse"/>
+                            </f:facet>
+                            <h:outputText value="#{item.adresse}"/>
+                        </b:dataTableColumn>
+
+                        <b:dataTableColumn>
+                            <f:facet name="header">
+                                <h:outputText value="Tel"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tel}"/>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn rendered="#{item.nature==1}">
+                            <f:facet name="header">
+                                <h:outputText value="NumeroPermis"/>
+                            </f:facet>
+                            <h:outputText value="#{item.numeroPermis}"/>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn rendered="#{item.nature==1}">
+                            <f:facet name="header">
+                                <h:outputText value="DateNaissance"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateNaissance}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn>
+                            <f:facet name="header">
+                                <h:outputText value="Email"/>
+                            </f:facet>
+                            <h:outputText value="#{item.email}"/>
+                        </b:dataTableColumn>
+
+                        <b:dataTableColumn>
+                            <f:facet name="header">
+                                <h:outputText value="Rc"/>
+                            </f:facet>
+                            <h:outputText value="#{item.rc}"/>
+                        </b:dataTableColumn>
+
+                        <b:dataTableColumn>
+                            <f:facet name="header">
+                                <h:outputText value="DateInscription"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateInscription}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn>
+                            <f:facet name="header">
+                                <h:outputText value="Pays"/>
+                            </f:facet>
+                            <h:outputText value="#{item.pays}"/>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn>
+                            <f:facet name="header">
+                                <h:outputText value="Nature"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nature==1?'Personne':'societe'}"/>
+                        </b:dataTableColumn>
+                    </b:dataTable>
+                </b:panel>
+                <b:panel look="primary">
+                    <p:panelGrid columns="2">
+                        <h:outputLabel value="Date Min:" for="dateMin"/>
+                        <p:calendar id="dateMin" pattern="dd/MM/yyyy" placeholder="DD/MM/YYYY" value="#{clientController.dateMin}" showOn="button"/>
+                        <h:outputLabel value="Date Min:" for="dateMax"/>
+                        <p:calendar id="dateMax" value="#{clientController.dateMax}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="Create chart" actionListener="#{clientController.init()}" update="chart" />
+                    <p:chart id="chart" type="bar" model="#{clientController.barModel}" style="height:300px"/>
+                </b:panel>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

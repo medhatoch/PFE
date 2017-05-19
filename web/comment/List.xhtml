@@ -29,6 +29,14 @@
 
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCommentTitle_dateComment}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateComment}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCommentTitle_nom}"/>
                             </f:facet>
                             <h:outputText value="#{item.nom}"/>
@@ -55,13 +63,13 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCommentTitle_id}"/>
                             </f:facet>
-                            <h:outputText value="#{item.id}"/>
+                                      <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CommentViewForm" oncomplete="PF('CommentViewDialog').show()"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":CommentEditForm" oncomplete="PF('CommentEditDialog').show()"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{commentController.destroy(item)}" update=":growl,datalist"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{commentController.prepareCreate}" update=":CommentCreateForm" oncomplete="PF('CommentCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CommentViewForm" oncomplete="PF('CommentViewDialog').show()" disabled="#{empty commentController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":CommentEditForm" oncomplete="PF('CommentEditDialog').show()" disabled="#{empty commentController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{commentController.destroy}" update=":growl,datalist" disabled="#{empty commentController.selected}"/>
+                  
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

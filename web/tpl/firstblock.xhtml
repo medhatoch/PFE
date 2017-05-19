@@ -3,38 +3,43 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui">
-    <div id="first-block">
+    <div id="first-block" style="font-size: 15px;">
         <div class="line">
             <h2>Decouvrer nos services</h2>
+            <br></br>
+            <br></br>
+            <br></br>
             <div class="margin">
-                <div class="s-12 m-6 l-3 margin-bottom">
-                    <p:commandLink>
-                        <i class="icon-paperplane_ico icon2x"></i>
-                        <h3>About</h3>
-                    </p:commandLink>
-                 
-                </div>
-                <div class="s-12 m-6 l-3 margin-bottom">
-                    <p:commandLink>
-                         <i class="icon-star icon2x"></i>
-                    <h3>Gallerie</h3>
-                    </p:commandLink>
-                   
-                </div>
-                <div class="s-12 m-6 l-3 margin-bottom">
-                    <p:commandLink action="reservation/List?faces-redirect=true">
-                        <i class="icon-message icon2x"></i>
-                    <h3>Services</h3>
-                    </p:commandLink>
-                    
-                </div>
-                <div class="s-12 m-6 l-3 margin-bottom">
-                    <p:commandLink action="contact/Contact?faces-redirect=true">
-                        <i class="icon-mail icon2x"></i>
-                        <h3>Contact</h3>
-                    </p:commandLink>
+                <h:form>
+                    <div class="s-12 m-6 l-3 margin-bottom">
+                        <p:commandLink action="/client/Login?faces-redirecr=true">
+                            <i class="icon-paperplane_ico icon2x"></i>
+                            <h3>Espace client</h3>
+                        </p:commandLink>
 
-                </div>
+                    </div>
+                    <div class="s-12 m-6 l-3 margin-bottom">
+                        <p:commandLink action="/tpl/Gallerie?faces-redirect=true">
+                            <i class="icon-star icon2x"></i>
+                            <h3>Gallerie</h3>
+                        </p:commandLink>
+
+                    </div>
+                    <div class="s-12 m-6 l-3 margin-bottom">
+                        <p:commandLink action="/client/Login?faces-redirecr=true">
+                            <i class="icon-message icon2x"></i>
+                            <h3>Login</h3>
+                        </p:commandLink>
+
+                    </div>
+                    <div class="s-12 m-6 l-3 margin-bottom">
+                        <p:commandLink action="/contact/Contact?faces-redirect=true">
+                            <i class="icon-mail icon2x"></i>
+                            <h3>Contact</h3>
+                        </p:commandLink>
+
+                    </div> 
+                </h:form>
             </div>
         </div>
     </div>

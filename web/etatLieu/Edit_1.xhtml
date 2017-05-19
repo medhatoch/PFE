@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EtatLieuItemEditDlg" widgetVar="EtatLieuItemEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditEtatLieuItemTitle}">
+            <h:form id="EtatLieuItemEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{etatLieuItemController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditEtatLieuItemLabel_composantVoiture}" for="composantVoiture" />
+                        <p:selectOneMenu id="composantVoiture" value="#{etatLieuItemController.selected.composantVoiture}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{composantVoitureController.itemsAvailableSelectOne}"
+                                           var="composantVoitureItem"
+                                           itemValue="#{composantVoitureItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditEtatLieuItemLabel_garantit}" for="garantit" />
+                        <p:inputText id="garantit" value="#{etatLieuItemController.selected.garantit}" title="#{bundle.EditEtatLieuItemTitle_garantit}" />
+                        <p:outputLabel value="#{bundle.EditEtatLieuItemLabel_etatLieu}" for="etatLieu" />
+                        <p:selectOneMenu id="etatLieu" value="#{etatLieuItemController.selected.etatLieu}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{etatLieuController.itemsAvailableSelectOne}"
+                                           var="etatLieuItem"
+                                           itemValue="#{etatLieuItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditEtatLieuItemLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{etatLieuItemController.selected.id}" title="#{bundle.EditEtatLieuItemTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{etatLieuItemController.update}" value="#{bundle.Save}" update="display,:EtatLieuItemListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EtatLieuItemEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EtatLieuItemEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

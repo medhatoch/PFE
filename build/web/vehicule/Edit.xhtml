@@ -12,6 +12,8 @@
             <h:form id="VehiculeEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{vehiculeController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditVehiculeLabel_path}" for="path" />
+                        <p:inputText id="path" value="#{vehiculeController.selected.path}" title="#{bundle.EditVehiculeTitle_path}" />
                         <p:outputLabel value="#{bundle.EditVehiculeLabel_matricule}" for="matricule" />
                         <p:inputText id="matricule" value="#{vehiculeController.selected.matricule}" title="#{bundle.EditVehiculeTitle_matricule}" />
                         <p:outputLabel value="#{bundle.EditVehiculeLabel_modele}" for="modele" />
