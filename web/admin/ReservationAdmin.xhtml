@@ -13,9 +13,14 @@
     </h:head>
     <ui:composition template="admin.xhtml">
         <ui:define name="content">
+            <h:form enctype="multipart/form-data">
+                <p:fileUpload value="#{fileBean.file}" mode="simple" />
+                <p:commandButton value="Submit" ajax="false"/>
+            </h:form>
             <h:form>
                 <b:panel title="Rechercher:" look="primary">
                     <p:panelGrid columns="2">
+
                         <p:outputLabel value="DateReservation:" for="dateReservation" />
                         <p:inputText id="dateReservation" value="#{reservationController.selected.dateReservation}" title="DateReservation" >
                             <f:convertDateTime pattern="MM/dd/yyyy" />
@@ -98,7 +103,7 @@
                         </b:dataTableColumn>
                     </b:dataTable>
                 </b:panel>
-                
+
                 <b:panel look="primary">
                     <p:commandButton actionListener="#{reservationController.init()}" value="create chart"/>
                     <p:chart type="bar" model="#{reservationController.barModel}" style="height:300px"/>

@@ -33,7 +33,7 @@
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListManagerTitle_blocked}"/>
                         </f:facet>
-                        <h:outputText value="#{item.blocked}"/>
+                        <h:outputText value="#{item.blocked==0?'Active':'Blocked'}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
@@ -64,6 +64,12 @@
                             <h:outputText value="#{bundle.ListManagerTitle_login}"/>
                         </f:facet>
                         <h:outputText value="#{item.login}"/>
+                    </p:column>
+                     <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Agence"/>
+                        </f:facet>
+                         <h:outputText value="#{item.agence.ville}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">

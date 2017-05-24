@@ -12,8 +12,14 @@
             <h:form id="ManagerCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{managerController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateManagerLabel_login}" for="login" />
+                        <p:inputText placeholder="Login is required" required="true" id="login" value="#{managerController.selected.login}" title="#{bundle.CreateManagerTitle_login}" />
                         <p:outputLabel value="#{bundle.CreateManagerLabel_blocked}" for="blocked" />
-                        <p:inputText id="blocked" value="#{managerController.selected.blocked}" title="#{bundle.CreateManagerTitle_blocked}" />
+                        <p:selectOneMenu id="blocked" value="#{managerController.selected.blocked}" >
+                            <f:selectItem itemValue="-1" itemLabel="----SELECT----"/>
+                            <f:selectItem itemValue="0" itemLabel="Active"/>
+                            <f:selectItem itemValue="1" itemLabel="Blocked"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateManagerLabel_nom}" for="nom" />
                         <p:inputText id="nom" value="#{managerController.selected.nom}" title="#{bundle.CreateManagerTitle_nom}" />
                         <p:outputLabel value="#{bundle.CreateManagerLabel_prenom}" for="prenom" />
@@ -23,9 +29,13 @@
                         <p:outputLabel value="#{bundle.CreateManagerLabel_tel}" for="tel" />
                         <p:inputText id="tel" value="#{managerController.selected.tel}" title="#{bundle.CreateManagerTitle_tel}" />
                         <p:outputLabel value="#{bundle.CreateManagerLabel_password}" for="password" />
-                        <p:inputText id="password" value="#{managerController.selected.password}" title="#{bundle.CreateManagerTitle_password}" />
-                        <p:outputLabel value="#{bundle.CreateManagerLabel_login}" for="login" />
-                        <p:inputText id="login" value="#{managerController.selected.login}" title="#{bundle.CreateManagerTitle_login}" />
+                        <p:password id="password" value="#{managerController.selected.password}" title="#{bundle.CreateManagerTitle_password}" />
+                        <p:outputLabel for="agence" value="Agence"></p:outputLabel>
+                        <p:selectOneMenu id="agence" value="#{managerController.selected.agence}" >
+                            <f:selectItems value="#{agenceController.itemsAvailableSelectOne}"
+                                           var="agence"
+                                           itemValue="#{agence}"/>
+                        </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{managerController.create}" value="#{bundle.Save}" update="display,:ManagerListForm:datalist,:growl" oncomplete="handleSubmit(args,'ManagerCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ManagerCreateDialog.hide()"/>

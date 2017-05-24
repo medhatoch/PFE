@@ -46,12 +46,6 @@
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundle.ListEtatLieuTitle_reservation}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.reservation}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
                             <h:outputText value="Action"/>
                         </f:facet>
                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="Detail" update=":EtatLieuItemListForm:datalist" actionListener="#{etatLieuItemController.findItems(item)}" />
@@ -80,19 +74,13 @@
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListEtatLieuItemTitle_composantVoiture}"/>
                         </f:facet>
-                        <h:outputText value="#{item.composantVoiture}"/>
+                        <h:outputText value="#{item.composantVoiture.nom}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListEtatLieuItemTitle_garantit}"/>
                         </f:facet>
                         <h:outputText value="#{item.garantit}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListEtatLieuItemTitle_etatLieu}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.etatLieu}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
@@ -104,7 +92,7 @@
                     </p:column>
                     <f:facet name="footer">
                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{etatLieuItemController.prepareCreate}" update=":EtatLieuItemCreateForm" oncomplete="PF('EtatLieuItemCreateDialog').show()"/>
-
+                        <p:commandButton value="Valider" actionListener="#{etatLieuItemController.save()}" update=":EtatLieuItemListForm,:EtatLieuListForm"/>
                     </f:facet>
                 </p:dataTable>
 

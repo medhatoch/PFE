@@ -13,15 +13,19 @@
         <ui:define name="content">
             <h:form>
                 <div id="content" class="left-align contact-page">
+                    <img style="margin-left: 40%;" height="200" width="200" class="img-circle" src="../resources/img/user.png"></img>
+                    <br></br>
+                    <h2 style="font-size: 25px; margin-left: 30%;">Créer un compte pour reserver votre voiture</h2><br></br>
                     <div class="line">
                         <div class="margin">
-                            <div class="s-12 l-6" style="margin-left: 40%;">
+                            <div class="s-12 l-6" style="margin-left: 25%;">
                                 <p:outputLabel for="login" value="Email:"/>
                                 <br></br>
-                                <p:inputText id="login" value="#{clientController.selected.email}"  placeholder="Login" title="Login" /><br></br>
-                                <p:outputLabel for="password" value="Password:"/><br></br><p:password id="password" value="#{clientController.selected.password}" placeholder="Password" title="Password" /><br></br>
-                                <br></br><p:commandLink id="submit"  action="#{clientController.seConnecte()}" style="background: #444;color: #fff;margin-left: 35px;" class="btn btn-primary" value="Se connecter"/><br></br><br></br>
-                                <p:commandButton icon="ui-icon-plus" style="color: #fff;" class="btn btn-info" value="Créer un compte:" action="CreateCompte?faces-redirect=true"/>
+                                <p:inputText class="form-control" id="login" value="#{clientController.selected.email}"  placeholder="Login" title="Login" /><br></br>
+                                <p:outputLabel for="password" value="Password:"/><br></br><p:password class="form-control" id="password" value="#{clientController.selected.password}" placeholder="Password" title="Password" /><br></br>
+                                <br></br><p:commandLink id="submit"  action="#{clientController.seConnecte()}" style="background: #444;color: #fff;margin-left:45%;" class="btn btn-primary" value="Se connecter"/><br></br><br></br>
+                                <p:commandButton icon="ui-icon-plus" style="color: #fff; margin-left: 40%;" class="btn btn-info" value="Créer un compte:" action="CreateCompte?faces-redirect=true"/><br></br><br></br>
+                                <s> <p:commandLink value="mot de pass oublié..?" action="/client/ForgotPassword?faces-redirect=true"/></s>
                             </div>
                         </div>
                     </div>

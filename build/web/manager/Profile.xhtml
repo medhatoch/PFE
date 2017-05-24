@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <div class="col-lg-10">
+                <b:panel look="primary" style="margin-top: 10%;">
+                    <h:form id="ManagerEditForm" class="text-info text-center text-capitalize">
+                        <h:panelGroup id="display">
+                            <p:outputLabel value="#{bundle.EditManagerLabel_nom}" for="nom" /><br></br>
+                            <p:inputText class="form-control" id="nom" value="#{managerController.selected.nom}" title="#{bundle.EditManagerTitle_nom}" /><br></br>
+                            <p:outputLabel value="#{bundle.EditManagerLabel_prenom}" for="prenom" /><br></br>
+                            <p:inputText class="form-control"  id="prenom" value="#{managerController.selected.prenom}" title="#{bundle.EditManagerTitle_prenom}" /><br></br>
+                            <p:outputLabel value="#{bundle.EditManagerLabel_email}" for="email" /><br></br>
+                            <p:inputText class="form-control"  id="email" value="#{managerController.selected.email}" title="#{bundle.EditManagerTitle_email}" /><br></br>
+                            <p:outputLabel value="#{bundle.EditManagerLabel_tel}" for="tel" /><br></br>
+                            <p:inputText class="form-control"  id="tel" value="#{managerController.selected.tel}" title="#{bundle.EditManagerTitle_tel}" /><br></br>
+                            <p:outputLabel value="Modifier" for="change"/><br></br>
+                            <p:commandButton id="change" class="btn btn-primary" action="#{managerController.updateProfile()}" value="#{bundle.Save}"/><br></br>
+                        </h:panelGroup>
+                    </h:form>
+                </b:panel>
+            </div>
+        </div>
+    </h:body>
+</html>
+

@@ -2,7 +2,10 @@ package controler.util;
 
 
 import bean.Client;
+import bean.Manager;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -13,19 +16,48 @@ public class SessionUtil {
     private SessionUtil() {
     }
 
+    private static List<Manager> users = new ArrayList();
 
+    private static boolean isConnected(Manager user) {
+        if (users.stream().anyMatch((x) -> (x.getLogin().equals(user.getLogin())))) {
+            return true;
+        }
+        return false;
+    }
 
-    public static void registerUtilisateur(Client user) {
+//    public static void attachUserToCommune(User user) {
+//        Commune myCommune = user.getCommune();
+//        if (myCommune.getUsers().indexOf(user) == -1) {
+//            myCommune.getUsers().add(user);
+//        }
+//        registerUser(user);
+//    }
+    public static void registerManager(Manager user) {
         setAttribute("user", user);
+        if (!isConnected(user)) {
+            users.add(user);
+        }
     }
 
-    public static Client getConnectedUtilisateur() {
-        return (Client) getAttribute("user");
+    public static void unSetManager(Manager user) {
+        setAttribute("user", null);
+        users.remove(user);
     }
-    
-    
 
-   
+    public static Manager getConnectedManager() {
+        return (Manager) getAttribute("user");
+    }
+
+    public static void registerClient(Client redevable) {
+        setAttribute("redevable", redevable);
+    }
+
+    public static Client getConnectedClient() {
+        return (Client) getAttribute("redevable");
+    }
+
+ 
+
     public static SessionUtil getInstance() {
         return instance;
     }

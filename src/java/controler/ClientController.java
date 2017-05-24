@@ -1,6 +1,8 @@
 package controler;
 
 import bean.Client;
+import com.sun.javafx.scene.control.SelectedCellsMap;
+import controler.util.EmailUtil;
 import controler.util.HashageUtil;
 import controler.util.JsfUtil;
 import controler.util.JsfUtil.PersistAction;
@@ -14,6 +16,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -22,6 +25,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.mail.MessagingException;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
@@ -35,14 +39,17 @@ public class ClientController implements Serializable {
     private List<Client> items = null;
     private List<Client> itemsFound;
     private Client selected;
-    private Date date =new Date();
+    private Client selected1;
+    private String email;
+    private Client connectedClient;
+    private Date date = new Date();
     private Date dateMin;
     private Date dateMax;
 
     public String seConnecte() {
         int res = ejbFacade.seConnecter(selected);
         if (res == 1) {
-            SessionUtil.registerUtilisateur(selected);
+            SessionUtil.registerClient(selected);
             System.out.println("1");
             JsfUtil.addSuccessMessage("Vous etes connectée!!");
             return "/client/Reserver?faces-redirect=true";
@@ -52,15 +59,26 @@ public class ClientController implements Serializable {
         return "/client/Login?faces-redirect=true";
     }
 
-    public void search(){
-        itemsFound=ejbFacade.search(selected);
+    public String forgotPassword() throws MessagingException {
+        Client client = ejbFacade.find(selected);
+        if (selected.getEmail() == client.getEmail()) {
+            //mailUtil.sendMail("ourmail","*****","message",selected.getEmail(),"resetpassword oblet");
+            return "/client/Login?faces-redirect=true";
+        }
+        return "/index?faces-redirect=true";
     }
-    
+
+    public void search() {
+        items = ejbFacade.search(selected);
+    }
+    public void rechercherParEmail(){
+        selected1=ejbFacade.findByEmail(email);
+    }
+    ///------------Charts-----------
     private BarChartModel barModel;
 
-    
     public void init() {
-        createBarModel();
+        barModel = createBarModel();
     }
 
     public BarChartModel getBarModel() {
@@ -70,8 +88,8 @@ public class ClientController implements Serializable {
         return barModel;
     }
 
-    public void createBarModel() {
-        barModel = ejbFacade.initBarModelClient(dateMin,dateMax);
+    public BarChartModel createBarModel() {
+        barModel = ejbFacade.initBarModelClient();
 
         barModel.setTitle("Bar Chart");
         barModel.setLegendPosition("ne");
@@ -83,12 +101,48 @@ public class ClientController implements Serializable {
         yAxis.setLabel("Nombre");
         yAxis.setMin(0);
         yAxis.setMax(200);
+        return barModel;
     }
+
     public ClientController() {
     }
 
+    public Client getConnectedClient() {
+        if (connectedClient == null) {
+            connectedClient = SessionUtil.getConnectedClient();
+        }
+        return connectedClient;
+    }
+
+    public Client getSelected1() {
+        if (selected1==null) {
+           selected1=new Client();
+        }
+        return selected1;
+    }
+
+    public void setSelected1(Client selected1) {
+        this.selected1 = selected1;
+    }
+
+    public String getEmail() {
+        if (email==null) {
+            email="";
+        }
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    
+    public void setConnectedClient(Client connectedClient) {
+        this.connectedClient = connectedClient;
+    }
+
     public List<Client> getItemsFound() {
-        if (itemsFound==null) {
+        if (itemsFound == null) {
             return ejbFacade.findAll();
         }
         return itemsFound;
@@ -99,8 +153,8 @@ public class ClientController implements Serializable {
     }
 
     public Date getDateMin() {
-        if (dateMin==null) {
-            dateMin=new Date();
+        if (dateMin == null) {
+            dateMin = new Date();
         }
         return dateMin;
     }
@@ -110,18 +164,17 @@ public class ClientController implements Serializable {
     }
 
     public Date getDateMax() {
-         if (dateMax==null) {
-            dateMax=new Date();
+        if (dateMax == null) {
+            dateMax = new Date();
         }
         return dateMax;
     }
+    
 
     public void setDateMax(Date dateMax) {
         this.dateMax = dateMax;
     }
 
-    
-    
     public Date getDate() {
         return date;
     }
@@ -129,7 +182,6 @@ public class ClientController implements Serializable {
     public void setDate(Date date) {
         this.date = date;
     }
-    
 
     public Client getSelected() {
         if (selected == null) {

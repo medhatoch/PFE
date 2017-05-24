@@ -1,10 +1,11 @@
 package controler;
 
 import bean.Manager;
+import controler.util.EmailUtil;
 import controler.util.HashageUtil;
 import controler.util.JsfUtil;
 import controler.util.JsfUtil.PersistAction;
-import controler.util.SessionUtilManager;
+import controler.util.SessionUtil;
 import service.ManagerFacade;
 
 import java.io.Serializable;
@@ -20,6 +21,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.mail.MessagingException;
 
 @Named("managerController")
 @SessionScoped
@@ -29,18 +31,63 @@ public class ManagerController implements Serializable {
     private service.ManagerFacade ejbFacade;
     private List<Manager> items = null;
     private Manager selected;
+    private Manager connectedManager;
 
     public ManagerController() {
     }
+    public String gotToProfile(Manager manager){
+        selected=SessionUtil.getConnectedManager();
+        return "/manager/Profile?faces-redirect=ture";
+    }
+    public String updateProfile(){
+        ejbFacade.edit(selected);
+        return "/location/List?faces-redirect=true";
+    }
+    public String deconnecter(){
+        SessionUtil.unSetManager(SessionUtil.getConnectedManager());
+        return "/manager/Login?faces-redirect=true";
+    }
 
     public String seConnecte() {
-        int res = ejbFacade.seConnecter(selected);
+        int res = ejbFacade.connect(selected.getLogin(),selected.getPassword());
         if (res == 1) {
-            SessionUtilManager.registerUtilisateur(selected);
-            JsfUtil.addSuccessMessage("Vous etes connectée en tant que manager!!!");
+            SessionUtil.registerManager(selected);
+            System.out.println("1");
+            System.out.println(selected);
+            JsfUtil.addSuccessMessage("Vous etes connectée en tant que admin site!!!");
             return "/admin/ContactAdmin?faces-redirect=true";
         }
+        System.out.println(res);
         return "/manager/Login?faces-redirect=true";
+    }
+      public String seConnecteApp() {
+        int res = ejbFacade.seConnecter(selected);
+        if (res == 1) {
+            SessionUtil.registerManager(selected);
+            JsfUtil.addSuccessMessage("Vous etes connectée en tant que application user!!!");
+            return "/location/List?faces-redirect=true";
+        }
+        return "/manager/Login?faces-redirect=true";
+    }
+
+    public String forgotPassword() throws MessagingException {
+        Manager manager = ejbFacade.find(selected);
+        if (selected.getLogin().equals(manager.getLogin()) && selected.getEmail().equals(manager.getEmail())) {
+            EmailUtil.sendMail("fromus", "passwrd", "msg", selected.getEmail(), "Reinitialisation du mot de pass");
+            return "/manager/Login?faces-redirect=true";
+        }
+        return "/index?faces-redirect=true";
+    }
+
+    public Manager getConnectedManager() {
+        if (connectedManager == null) {
+            connectedManager = SessionUtil.getConnectedManager();
+        }
+        return connectedManager;
+    }
+
+    public void setConnectedManager(Manager connectedManager) {
+        this.connectedManager = connectedManager;
     }
 
     public Manager getSelected() {

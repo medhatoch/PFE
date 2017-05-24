@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LocationViewDlg" widgetVar="LocationViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewLocationTitle}">
+            <h:form id="LocationViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{locationController.selected != null}">
+                        <h:outputText value="#{bundle.ViewLocationLabel_client}"/>
+                        <h:outputText value="#{locationController.selected.client}" title="#{bundle.ViewLocationTitle_client}"/>
+                        <h:outputText value="#{bundle.ViewLocationLabel_etatLieu}"/>
+                        <h:outputText value="#{locationController.selected.etatLieu}" title="#{bundle.ViewLocationTitle_etatLieu}"/>
+                        <h:outputText value="#{bundle.ViewLocationLabel_dateDepart}"/>
+                        <h:outputText value="#{locationController.selected.dateDepart}" title="#{bundle.ViewLocationTitle_dateDepart}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewLocationLabel_heure}"/>
+                        <h:outputText value="#{locationController.selected.heure}" title="#{bundle.ViewLocationTitle_heure}"/>
+                        <h:outputText value="#{bundle.ViewLocationLabel_agenceDepart}"/>
+                        <h:outputText value="#{locationController.selected.agenceDepart}" title="#{bundle.ViewLocationTitle_agenceDepart}"/>
+                        <h:outputText value="#{bundle.ViewLocationLabel_agenceArrive}"/>
+                        <h:outputText value="#{locationController.selected.agenceArrive}" title="#{bundle.ViewLocationTitle_agenceArrive}"/>
+                        <h:outputText value="#{bundle.ViewLocationLabel_vehicule}"/>
+                        <h:outputText value="#{locationController.selected.vehicule}" title="#{bundle.ViewLocationTitle_vehicule}"/>
+                        <h:outputText value="#{bundle.ViewLocationLabel_prixReservation}"/>
+                        <h:outputText value="#{locationController.selected.prixReservation}" title="#{bundle.ViewLocationTitle_prixReservation}"/>
+                        <h:outputText value="#{bundle.ViewLocationLabel_nbrJours}"/>
+                        <h:outputText value="#{locationController.selected.nbrJours}" title="#{bundle.ViewLocationTitle_nbrJours}"/>
+                        <h:outputText value="#{bundle.ViewLocationLabel_id}"/>
+                        <h:outputText value="#{locationController.selected.id}" title="#{bundle.ViewLocationTitle_id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="LocationViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

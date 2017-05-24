@@ -21,15 +21,6 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditEtatLieuItemLabel_garantit}" for="garantit" />
                         <p:inputText id="garantit" value="#{etatLieuItemController.selected.garantit}" title="#{bundle.EditEtatLieuItemTitle_garantit}" />
-                        <p:outputLabel value="#{bundle.EditEtatLieuItemLabel_etatLieu}" for="etatLieu" />
-                        <p:selectOneMenu id="etatLieu" value="#{etatLieuItemController.selected.etatLieu}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{etatLieuController.itemsAvailableSelectOne}"
-                                           var="etatLieuItem"
-                                           itemValue="#{etatLieuItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditEtatLieuItemLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{etatLieuItemController.selected.id}" title="#{bundle.EditEtatLieuItemTitle_id}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{etatLieuItemController.update}" value="#{bundle.Save}" update="display,:EtatLieuItemListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EtatLieuItemEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="EtatLieuItemEditDialog.hide()"/>

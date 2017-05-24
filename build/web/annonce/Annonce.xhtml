@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <ui:composition template="/index.xhtml">
+        <ui:define name="content">
+            <div class="container" style="background-color: #ffffff;width: 100%;">
+                <h:form id="annonces" style="font-size: 20px;">
+                    <div class="col-lg-10">
+
+                        <h1><h:outputText value="Decouvrer nos annonces et nos offres"/></h1><br></br><br></br>
+                        <b:dataTable value="#{annonceController.item}" var="item">
+                            <b:dataTableColumn>
+                                <f:facet name="header">
+                                    <h:outputText value="Annonces"/>
+                                </f:facet>
+                                <div class="col-lg-4">
+                                    <img src="../resources/img/logo.jpg" class="img-thumbnail" />
+                                    <h4>Date limte pour l'offre:</h4>
+                                    <h:outputText value="#{item.dateExpiration}">
+                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                    </h:outputText>
+                                </div>
+                                <div class="col-lg-4">
+                                    <h:outputText value="#{item.annonce}"/>
+                                </div>
+                            </b:dataTableColumn>
+                        </b:dataTable>
+                    </div>
+                    <div class="col-lg-2">
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <p:dataTable value="#{annonceController.items}" var="item">
+                            <p:column>
+                                <img src="../resources/img/logo.jpg" class="img-thumbnail" />
+                                <h:outputText value="#{item.dateAnnonce}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                                <br></br>
+                                <p:commandButton value="Afficher" actionListener="#{annonceController.selectAnnonce(item)}" update="annonces"/>
+                            </p:column>
+                        </p:dataTable>
+                    </div> 
+                </h:form>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+            </div>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+        </ui:define>
+    </ui:composition>
+</html>
+

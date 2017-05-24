@@ -34,6 +34,33 @@ public class ReservationItem implements Serializable {
     private Reservation reservation;
     @OneToOne
     private EtatLieu etatLieu;
+    @OneToOne
+    private Agence agenceDepart;
+    @OneToOne
+    private Agence agenceArrive;
+
+    public Agence getAgenceDepart() {
+        if (agenceDepart==null) {
+            agenceDepart=new Agence();
+        }
+        return agenceDepart;
+    }
+
+    public void setAgenceDepart(Agence agenceDepart) {
+        this.agenceDepart = agenceDepart;
+    }
+
+    public Agence getAgenceArrive() {
+        if (agenceArrive==null) {
+            agenceArrive=new Agence();
+        }
+        return agenceArrive;
+    }
+
+    public void setAgenceArrive(Agence agenceArrive) {
+        this.agenceArrive = agenceArrive;
+    }
+    
 
     public EtatLieu getEtatLieu() {
         return etatLieu;
@@ -115,7 +142,7 @@ public class ReservationItem implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.ReservationItem[ id=" + id + " ]";
+        return "ReservationItem No:" + id;
     }
     
 }

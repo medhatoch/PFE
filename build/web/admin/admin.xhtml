@@ -16,6 +16,8 @@
         <h:form>
         <nav>
             <ul class="menu">
+                
+                <li><p:outputLabel value="Hello:D #{managerController.connectedManager.prenom}"></p:outputLabel></li>
                 <li><p:commandLink action="/index?faces-redirect=true" value="Home" /></li>
                 <li><p:commandLink action="/manager/Login?faces-redirect=true" value="Log out" /></li>
                 <li><p:commandLink action="/admin/ReservationAdmin?faces-redirect=true" value="Reservation" /></li>

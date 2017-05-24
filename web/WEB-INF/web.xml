@@ -4,6 +4,26 @@
         <param-name>primefaces.THEME</param-name>
         <param-value>omega</param-value>
     </context-param>
+    
+    <context-param>
+        <param-name>primefaces.UPLOADER</param-name>
+        <param-value>auto</param-value>
+    </context-param>
+    <filter>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <filter-class>
+            org.primefaces.webapp.filter.FileUploadFilter
+        </filter-class>
+        <init-param>
+            <param-name>thresholdSize</param-name>
+            <param-value>51200</param-value>
+        </init-param>
+        <init-param>
+            <param-name>uploadDirectory</param-name>
+            <param-value>/resources/img</param-value>
+        </init-param>
+    </filter>
+    
     <error-page>
         <exception-type>javax.faces.application.ViewExpiredException</exception-type>
         <location>/WEB-INF/expired.xhtml</location>

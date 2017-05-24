@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
     <h:head>
         <title>Facelet Title</title>
         <link rel="stylesheet" href="#{request.contextPath}/resources/bootstrap/css/bootstrap.min.css"/>
@@ -11,20 +12,26 @@
     <h:body>  
         <div class="container"> 
             <h:form>
-                <div class="col-lg-offset-4">
-                    <div class="col-lg-6">
-                        <div class="panel panel-primary" style="margin-top: 10%;">
-                            <div class="panel-heading">
-                                Login
-                            </div>
-                            <div class="panel-body">
-                                <p:outputLabel value="Email:" for="email" />
-                                <p:inputText class="form-control" id="email" value="#{managerController.selected.login}" title="Email" />
-                                <p:outputLabel value="password:" for="password" />
-                                <p:password id="password" class="form-control" value="#{managerController.selected.password}" title="Password" /><br></br>
-                                <p:commandLink class="btn btn-flat btn-primary"  action="#{managerController.seConnecte()}" value="login" />
-                            </div>
-                        </div> 
+                <div class="col-lg-offset-2">
+                    <div class="col-lg-5 text-info text-center">
+                        <b:panel look="primary" style="margin-top: 30%;">
+                            <p:outputLabel value="Login to site administration:" for="email" />
+                            <p:inputText class="form-control" id="email" value="#{managerController.selected.login}" title="Email" />
+                            <p:outputLabel value="password:" for="password" />
+                            <p:password id="password" class="form-control" value="#{managerController.selected.password}" title="Password" /><br></br>
+                            <p:commandButton class="btn btn-flat btn-primary"  action="#{managerController.seConnecte()}" value="login" /><br></br>
+                            <u><p:commandLink class="text-info" value="mot de pass oublé?" action="/admin/ForgotPassword?faces-redirect=true"/></u>
+                        </b:panel>
+                    </div>
+                    <div class="col-lg-5 text-info text-center">
+                        <b:panel look="primary" style="margin-top: 30%;">
+                            <p:outputLabel value="Login to application:" for="email1" />
+                            <p:inputText class="form-control" id="email1" value="#{managerController.selected.login}" title="Email" />
+                            <p:outputLabel value="password:" for="password1" />
+                            <p:password id="password1" class="form-control" value="#{managerController.selected.password}" title="Password" /><br></br>
+                            <p:commandButton class="btn btn-flat btn-primary"  action="#{managerController.seConnecteApp()}" value="login" /><br></br>
+                            <u><p:commandLink class="text-info" value="mot de pass oublé?" action="/admin/ForgotPassword?faces-redirect=true"/></u>
+                        </b:panel>
                     </div>
                 </div>
             </h:form>

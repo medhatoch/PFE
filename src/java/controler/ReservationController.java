@@ -1,4 +1,3 @@
-
 package controler;
 
 import bean.Client;
@@ -8,6 +7,7 @@ import bean.ReservationItem;
 import bean.Vehicule;
 import controler.util.JsfUtil;
 import controler.util.JsfUtil.PersistAction;
+import controler.util.SessionUtil;
 import service.ReservationFacade;
 
 import java.io.Serializable;
@@ -29,6 +29,7 @@ import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
 import service.ReservationItemFacade;
+import service.VehiculeFacade;
 
 @Named("reservationController")
 @SessionScoped
@@ -38,15 +39,9 @@ public class ReservationController implements Serializable {
     private service.ReservationFacade ejbFacade;
     @EJB
     private service.ReservationItemFacade ejbItemsFacade;
+    @EJB
+    private VehiculeFacade vehiculeFacade;
     private boolean v1;
-    private boolean v2;
-    private boolean v3;
-    private boolean v4;
-    private boolean v5;
-    private boolean v6;
-    private boolean v7;
-    private boolean v8;
-    private boolean v9;
     private List<Reservation> items = null;
     private List<Reservation> itemsFound;
     private List<ReservationItem> itemsSelected = new ArrayList<>();
@@ -58,14 +53,28 @@ public class ReservationController implements Serializable {
     private Date dateMin;
     private Date dateMax;
     private int nbrJours;
+    private Client client;
+    private Manager manager;
+
+    public void search() {
+        itemsFound = ejbFacade.search(selected, dateMin, dateMax, prixMin, prixMax);
+    }
+    
+     public void searchAdmin(){
+         items = ejbFacade.findReservation(client, manager, dateMin, dateMax, prixMax, prixMin);
+     }
 
     public void save() {
-        ejbFacade.save(itemsSelected, null, null);
+        if (SessionUtil.getConnectedClient() == null) {
+            ejbFacade.save(itemsSelected, SessionUtil.getConnectedManager(), client);
+        }
+        ejbFacade.save(itemsSelected, SessionUtil.getConnectedManager(), SessionUtil.getConnectedClient());
         JsfUtil.addSuccessMessage("Validée");
     }
 
     public void reserver(Vehicule vehicule) {
         vehicule.setEtat(false);
+        vehiculeFacade.edit(vehicule);
         vehicules.add(vehicule);
         ReservationItem item = new ReservationItem();
         item.setVehicule(vehicule);
@@ -73,6 +82,12 @@ public class ReservationController implements Serializable {
         item.setPrixReservation(nbrJours * vehicule.getPrixParJour());
         itemsSelected.add(item);
         JsfUtil.addSuccessMessage("selected!!!");
+    }
+
+    public void annulerReservation(Vehicule vehicule) {
+        vehicule.setEtat(true);
+        vehiculeFacade.edit(vehicule);
+        vehicules.remove(vehicule);
     }
 
     public void destroy(Reservation reservation) {
@@ -117,6 +132,17 @@ public class ReservationController implements Serializable {
 //        selected.setReservationItems(ejbItemsFacade.findByReservation(selected));
 //    }
     public ReservationController() {
+    }
+
+    public Client getClient() {
+        if (client == null) {
+            client = new Client();
+        }
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public Date getDateMin() {
@@ -230,71 +256,6 @@ public class ReservationController implements Serializable {
 
     public void setV1(boolean v1) {
         this.v1 = v1;
-    }
-
-    public boolean isV2() {
-        return v2;
-    }
-
-    public void setV2(boolean v2) {
-        this.v2 = v2;
-    }
-
-    public boolean isV3() {
-        return v3;
-    }
-
-    public void setV3(boolean v3) {
-        this.v3 = v3;
-    }
-
-    public boolean isV4() {
-        return v4;
-    }
-
-    public void setV4(boolean v4) {
-        this.v4 = v4;
-    }
-
-    public boolean isV5() {
-        return v5;
-    }
-
-    public void setV5(boolean v5) {
-        this.v5 = v5;
-    }
-
-    public boolean isV6() {
-        return v6;
-    }
-
-    public void setV6(boolean v6) {
-        this.v6 = v6;
-    }
-
-    public boolean isV7() {
-        return v7;
-    }
-
-    public void setV7(boolean v7) {
-        this.v7 = v7;
-    }
-
-    public boolean isV8() {
-        return v8;
-    }
-
-    public void setV8(boolean v8) {
-        this.v8 = v8;
-    }
-
-    public boolean isV9() {
-        return v9;
-    }
-
-    ////************
-    public void setV9(boolean v9) {
-        this.v9 = v9;
     }
 
     ///*************

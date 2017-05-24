@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -26,9 +27,22 @@ public class Manager implements Serializable {
     private String nom;
     private String prenom;
     private String email;
+    @ManyToOne
+    private Agence agence;
     private int tel;
     private boolean admin;
     private int blocked;
+
+    public Agence getAgence() {
+        if (agence == null) {
+            agence = new Agence();
+        }
+        return agence;
+    }
+
+    public void setAgence(Agence agence) {
+        this.agence = agence;
+    }
 
     public int getBlocked() {
         return blocked;
@@ -37,8 +51,6 @@ public class Manager implements Serializable {
     public void setBlocked(int blocked) {
         this.blocked = blocked;
     }
-    
-    
 
     public String getNom() {
         return nom;
@@ -94,7 +106,7 @@ public class Manager implements Serializable {
 
     public void setLogin(String login) {
         this.login = login;
-    }    
+    }
 
     @Override
     public int hashCode() {
@@ -121,11 +133,9 @@ public class Manager implements Serializable {
         return true;
     }
 
-
-
     @Override
     public String toString() {
-        return "Manager{" + "nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", tel=" + tel + ", admin=" + admin + ", password=" + password + '}';
+        return "Manager-nom:" + nom + "-prenom:" + prenom + "-email:" + email;
     }
-    
+
 }

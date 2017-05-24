@@ -6,6 +6,7 @@ import controler.util.JsfUtil.PersistAction;
 import service.AnnonceFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -27,8 +28,26 @@ public class AnnonceController implements Serializable {
     @EJB
     private service.AnnonceFacade ejbFacade;
     private List<Annonce> items = null;
+    private List<Annonce> item;
     private Annonce selected;
 
+    public void selectAnnonce(Annonce annonce){
+        item=new ArrayList<>();
+        item.add(annonce);
+    }
+    public List<Annonce> getItem() {
+        if (item==null) {
+            return ejbFacade.findAll();
+        }
+        return item;
+    }
+
+    public void setItem(List<Annonce> item) {
+        this.item = item;
+    }
+
+    
+    
     public AnnonceController() {
     }
 

@@ -36,36 +36,29 @@ public class ReservationItemFacade extends AbstractFacade<ReservationItem> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
     @EJB
     ClientFacade clientFacade;
-    
-    
+
     public void generatePdf(ReservationItem reservationItem) throws JRException, IOException {
-        
         Vehicule vehicule = reservationItem.getVehicule();
-        
-        
-        
-        Client client = clientFacade.find(SessionUtil.getConnectedUtilisateur().getEmail());
-        
-        System.out.println(client);
-        Map<String, Object> params = new HashMap();
-        params.put("nom", client.getNom());
-        params.put("prenom", client.getPrenom());
-        params.put("tel", client.getTel());
-        params.put("adresse", client.getAdresse());
-        params.put("localite", client.getLocalite());
-        params.put("pays", client.getPays());
-        params.put("marque", vehicule.getMarque());
-        params.put("matricule", vehicule.getMatricule());
-        params.put("categorie", vehicule.getCategorie());
-        params.put("modele", vehicule.getModele());
-        
-        
-        System.out.println(params);
-        
-        PdfUtil.generatePdf(findAll(), params, "contratReservat", "/jasper/contratReservat.jasper");
+        Client client = SessionUtil.getConnectedClient();
+        if (client != null) {
+            System.out.println(client);
+            Map<String, Object> params = new HashMap();
+            params.put("nom", client.getNom());
+            params.put("prenom", client.getPrenom());
+            params.put("tel", client.getTel());
+            params.put("adresse", client.getAdresse());
+            params.put("localite", client.getLocalite());
+            params.put("pays", client.getPays());
+            params.put("marque", vehicule.getMarque());
+            params.put("matricule", vehicule.getMatricule());
+            params.put("categorie", vehicule.getCategorie());
+            params.put("modele", vehicule.getModele());
+            System.out.println(params);
+            PdfUtil.generatePdf(findAll(), params, "contratReservat", "/jasper/contratReservat.jasper");
+        }
     }
 
     public List<ReservationItem> findItems(Reservation reservation) {

@@ -8,9 +8,9 @@
 
     <ui:composition template="/index.xhtml">
         <ui:define name="content">
-            <h:form id="ClientCreateForm" style="width: 80%;margin: auto; background-color: #ffffff;">
+            <h:form id="ClientCreateForm" style="width: 100%;margin: auto; background-color: #ffffff;">
                 <p:panelGrid columns="4">
-                    <p:outputLabel value="Nature" for="nature" />
+                    <p:outputLabel value="Nature:" for="nature" />
                     <h:selectOneMenu class="form-control" id="nature" value="#{clientController.selected.nature}">
                         <f:selectItem itemLabel="------SELECT------" itemValue="0"/>
                         <f:selectItem itemLabel="personne physique" itemValue="1"/>

@@ -14,4 +14,5 @@
     <jdbc-resource enabled="true" jndi-name="java:app/reseravtion_jndi" object-type="user" pool-name="mysql_reservation_rootPool"/>
     <jdbc-resource enabled="true" jndi-name="java:app/reservation_jndi" object-type="user" pool-name="mysql_reservation_rootPool"/>
     <jdbc-resource enabled="true" jndi-name="java:app/reservation_jndi" object-type="user" pool-name="mysql_reservation_rootPool"/>
+    <jdbc-resource enabled="true" jndi-name="java:app/reservation_jndi" object-type="user" pool-name="mysql_reservation_rootPool"/>
 </resources>

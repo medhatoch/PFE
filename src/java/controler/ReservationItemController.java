@@ -31,8 +31,8 @@ public class ReservationItemController implements Serializable {
     private List<ReservationItem> items = null;
     private ReservationItem selected;
     
-    public void generatePdf() throws JRException, IOException{
-        ejbFacade.generatePdf(selected);
+    public void generatePdf(ReservationItem reservationItem) throws JRException, IOException{
+        ejbFacade.generatePdf(reservationItem);
         FacesContext.getCurrentInstance().responseComplete();
     }
     
@@ -44,6 +44,9 @@ public class ReservationItemController implements Serializable {
     }
 
     public ReservationItem getSelected() {
+        if (selected==null) {
+            selected=new ReservationItem();
+        }
         return selected;
     }
 

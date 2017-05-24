@@ -7,6 +7,7 @@ import controler.util.JsfUtil.PersistAction;
 import service.EtatLieuItemFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -30,19 +31,44 @@ public class EtatLieuItemController implements Serializable {
     @EJB
     private EtatLieuFacade etatLieuFacade;
     private List<EtatLieuItem> items = null;
+    private List<EtatLieuItem> itemsAdded;
     private EtatLieuItem selected;
+
+    public void addEtatLieuItem() {
+        if (itemsAdded == null) {
+            itemsAdded = new ArrayList<>();
+        }
+        itemsAdded.add(selected);
+    }
+    public void save(){
+        etatLieuFacade.createEtatLieu(items);//le service de creation est dans etatLieuFacade
+    }
 
     public EtatLieuItemController() {
     }
-  
+
+    public List<EtatLieuItem> getItemsAdded() {
+        if (itemsAdded == null) {
+            itemsAdded = new ArrayList<>();
+        }
+        return itemsAdded;
+    }
+
+    public void setItemsAdded(List<EtatLieuItem> itemsAdded) {
+        this.itemsAdded = itemsAdded;
+    }
+
     public EtatLieuItem getSelected() {
+        if (selected == null) {
+            selected = new EtatLieuItem();
+        }
         return selected;
     }
 
-    public void findItems(EtatLieu etatLieu){
-        items=ejbFacade.findItems(etatLieu);
+    public void findItems(EtatLieu etatLieu) {
+        items = ejbFacade.findItems(etatLieu);
     }
-  
+
     public void destroy(EtatLieuItem etatLieuItem) {
         ejbFacade.remove(etatLieuItem);
         if (!JsfUtil.isValidationFailed()) {

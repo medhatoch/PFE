@@ -200,7 +200,7 @@ public class Client implements Serializable {
 
     @Override
     public String toString() {
-        return "Client{" + "cin=" + cin + ", nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", email=" + email + '}';
+        return "Client-cin:" + cin + "-nom:" + nom + "-prenom:" + prenom + "-adresse:" + adresse + "-email:" + email;
     }
 
     

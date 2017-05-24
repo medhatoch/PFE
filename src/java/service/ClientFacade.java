@@ -51,6 +51,15 @@ public class ClientFacade extends AbstractFacade<Client> {
         return false;
     }
 
+    public Client findByEmail(String email) {
+        Client client = (Client) em.createQuery("SELECT c FROM Client c WHERE c.email='" + email + "'").getSingleResult();
+        if (client == null) {
+            return new Client();
+        }
+        System.out.println(client);
+        return client;
+    }
+
     public List<Client> search(Client client) {
         String rq = "SELECT c FROM Client c WHERE 1=1";
         rq += SearchUtil.addConstraint("c", "email", "=", client.getEmail());
@@ -58,6 +67,7 @@ public class ClientFacade extends AbstractFacade<Client> {
         rq += SearchUtil.addConstraint("c", "prenom", "=", client.getPrenom());
         rq += SearchUtil.addConstraint("c", "cin", "=", client.getCin());
         rq += SearchUtil.addConstraint("c", "rc", "=", client.getRc());
+        rq += SearchUtil.addConstraint("c", "nature", "=", client.getNature());
         List<Client> list = em.createQuery(rq).getResultList();
         if (list == null) {
             return new ArrayList<>();
@@ -92,31 +102,30 @@ public class ClientFacade extends AbstractFacade<Client> {
         }
     }
 
-    public BarChartModel initBarModelClient(Date dateMin, Date dateMax) {
+    public BarChartModel initBarModelClient() {
         List<Client> clients = findAll();
         List<Client> results = new ArrayList<>();
-        int nbr = 0;
-        for (int i = 0; i < clients.size(); i++) {
-            Client item = clients.get(i);
-            if (item.getDateInscription().after(dateMin) && item.getDateInscription().before(dateMax)) {
-                results.add(item);
-                nbr++;
-            }
-        }
+//        int nbr = 0;
+//        for (int i = 0; i < clients.size(); i++) {
+//            Client item = clients.get(i);
+//            if (item.getDateInscription().after(dateMin) && item.getDateInscription().before(dateMax)) {
+//                results.add(item);
+//                nbr++;
+//            }
+//        }
 
         BarChartModel model = new BarChartModel();
 
+        ChartSeries nomreClientsTotal = new ChartSeries();
         ChartSeries nomreClients = new ChartSeries();
 
         nomreClients.setLabel("Nombre de clients");
 
-        for (int i = 0; i < results.size(); i++) {
-            Client item = results.get(i);
-            System.out.println(item);
-            nomreClients.set("nombre de clients", nbr);
-        }
+        nomreClients.set("nombre de clients", count());
+        nomreClientsTotal.set("nombre de clients total", count());
 
         model.addSeries(nomreClients);
+        model.addSeries(nomreClientsTotal);
         return model;
     }
 

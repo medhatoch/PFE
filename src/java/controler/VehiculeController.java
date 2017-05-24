@@ -26,20 +26,107 @@ public class VehiculeController implements Serializable {
 
     @EJB
     private service.VehiculeFacade ejbFacade;
+    
     private List<Vehicule> items = null;
-    private List<Vehicule> itemsFound;
+    private List<Vehicule> itemsFound=null;
     private Vehicule selected;
+    private Double prixMax = 0D;
+    private Double prixMin = 0D;
+    private Boolean etat;
+    private int nombrePlace;
+    private String modele;
+    private String categorie;
+    private String carburant;
+    private String marque;
+    
+    
+    
 
-  
+    public void search() {
+        itemsFound = ejbFacade.findMaxMin(prixMin, prixMax);
+    }
+    
+    public void searchAdmin() {
+        items = ejbFacade.findVehicule(etat, nombrePlace, modele, categorie, carburant, marque, prixMax, prixMin);
+    }
+
     public VehiculeController() {
     }
 
+    public Boolean getEtat() {
+        return etat;
+    }
+
+    public void setEtat(Boolean etat) {
+        this.etat = etat;
+    }
+
+    public int getNombrePlace() {
+        return nombrePlace;
+    }
+
+    public void setNombrePlace(int nombrePlace) {
+        this.nombrePlace = nombrePlace;
+    }
+
+    public String getModele() {
+        return modele;
+    }
+
+    public void setModele(String modele) {
+        this.modele = modele;
+    }
+
+    public String getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(String categorie) {
+        this.categorie = categorie;
+    }
+
+    public String getCarburant() {
+        return carburant;
+    }
+
+    public void setCarburant(String carburant) {
+        this.carburant = carburant;
+    }
+
+    public String getMarque() {
+        return marque;
+    }
+
+    public void setMarque(String marque) {
+        this.marque = marque;
+    }
+
+    
     public List<Vehicule> getItemsFound() {
-        return ejbFacade.disponibleVehicules();
+        if (itemsFound==null) {
+             return ejbFacade.findAll();
+        }
+       return itemsFound;
     }
 
     public void setItemsFound(List<Vehicule> itemsFound) {
         this.itemsFound = itemsFound;
+    }
+
+    public Double getPrixMax() {
+        return prixMax;
+    }
+
+    public void setPrixMax(Double prixMax) {
+        this.prixMax = prixMax;
+    }
+
+    public Double getPrixMin() {
+        return prixMin;
+    }
+
+    public void setPrixMin(Double prixMin) {
+        this.prixMin = prixMin;
     }
 
     public Vehicule getSelected() {
@@ -70,6 +157,7 @@ public class VehiculeController implements Serializable {
     }
 
     public void create() {
+        selected.setEtat(true);
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("VehiculeCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -91,6 +179,9 @@ public class VehiculeController implements Serializable {
     public List<Vehicule> getItems() {
         if (items == null) {
             items = getFacade().findAll();
+        }
+        if (getFacade().findAll()==null) {
+            return new ArrayList<>();
         }
         return items;
     }

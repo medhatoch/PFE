@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LocationCreateDlg" widgetVar="LocationCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateLocationTitle}">
+            <h:form id="search">
+                <p:panelGrid columns="4">
+                    <p:outputLabel for="email" value="Email du client:"/>
+                    <p:inputText id="email" value="#{locationController.email}">
+                        <p:commandButton icon="ui-icon-search" update=":search" actionListener="#{locationController.rechercheParEmail()}"/>
+                    </p:inputText>
+                    <p:outputLabel for="nom" value="Nom:"/>
+                    <h:outputText value="#{locationController.selected.client.nom}" id="nom"/>
+                    <p:outputLabel for="prenom" rendered="#{locationController.selected.client.nature==1}"  value="Preom:"/>
+                    <h:outputText value="#{locationController.selected.client.prenom}" rendered="#{locationController.selected.client.nature==1}" id="prenom"/>
+                    <p:outputLabel for="cin" value="CIN:"  rendered="#{locationController.selected.client.nature==1}" />
+                    <h:outputText value="#{locationController.selected.client.cin}" rendered="#{locationController.selected.client.nature==1}" id="cin"/>
+                    <p:outputLabel for="rc" value="RC:" rendered="#{locationController.selected.client.nature==2}" />
+                    <h:outputText value="#{locationController.selected.client.rc}" rendered="#{locationController.selected.client.nature==2}" id="rc"/>
+                </p:panelGrid>
+                <p:commandButton value="create new?" action="client/List?faces-redirect=true" icon="ui-icon-plus"/>
+            </h:form>
+            <br></br>
+            <br></br>
+            <h:form id="LocationCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="4" rendered="#{locationController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateLocationLabel_vehicule}" for="vehicule" />
+                        <p:inputText value="#{locationController.matr}" id="vehicule">
+                            <p:commandButton update=":LocationCreateForm" icon="ui-icon-search" actionListener="#{locationController.rechercheVehicule()}"/>
+                        </p:inputText>
+                        <p:outputLabel value="marque"/>
+                        <h:outputText value="#{locationController.selected.vehicule.marque}"/>
+                        <p:outputLabel value="categorie"/>
+                        <h:outputText value="#{locationController.selected.vehicule.categorie}"/>
+                        <p:outputLabel value="modele"/>
+                        <h:outputText value="#{locationController.selected.vehicule.modele}"/>
+                        <p:outputLabel value="prix par jour"/>
+                        <h:outputText value="#{locationController.selected.vehicule.prixParJour}"/>
+                        <p:outputLabel value="#{bundle.CreateLocationLabel_etatLieu}" for="etatLieu" />
+                        <p:selectOneMenu id="etatLieu" value="#{locationController.selected.etatLieu}" >
+                            <f:selectItems value="#{etatLieuController.itemsAvailableSelectOne}"
+                                           var="etatLieuItem"
+                                           itemValue="#{etatLieuItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateLocationLabel_dateDepart}" for="dateDepart" />
+                        <p:calendar id="dateDepart" pattern="MM/dd/yyyy" value="#{locationController.selected.dateDepart}" title="#{bundle.EditLocationTitle_dateDepart}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateLocationLabel_heure}" for="heure" />
+                        <p:inputText id="heure" value="#{locationController.selected.heure}" title="#{bundle.CreateLocationTitle_heure}" />
+                        <p:outputLabel value="#{bundle.CreateLocationLabel_agenceDepart}" for="agenceDepart" />
+                        <p:selectOneMenu id="agenceDepart" value="#{locationController.selected.agenceDepart}" >
+                            <f:selectItems value="#{agenceController.itemsAvailableSelectOne}"
+                                           var="agenceDepartItem"
+                                           itemValue="#{agenceDepartItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateLocationLabel_agenceArrive}" for="agenceArrive" />
+                        <p:selectOneMenu id="agenceArrive" value="#{locationController.selected.agenceArrive}" >
+                            <f:selectItems value="#{agenceController.itemsAvailableSelectOne}"
+                                           var="agenceArriveItem"
+                                           itemValue="#{agenceArriveItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateLocationLabel_nbrJours}" for="nbrJours" />
+                        <p:inputText id="nbrJours" value="#{locationController.selected.nbrJours}" title="#{bundle.CreateLocationTitle_nbrJours}" >
+                            <p:ajax update="prixReservation" listener="#{locationController.calculatePrice()}"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{bundle.CreateLocationLabel_prixReservation}" for="prixReservation" />
+                        <h:outputText id="prixReservation" value="#{locationController.selected.prixReservation}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{locationController.create}" value="#{bundle.Save}" update="display,:LocationListForm:datalist,:growl" oncomplete="handleSubmit(args,'LocationCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="LocationCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

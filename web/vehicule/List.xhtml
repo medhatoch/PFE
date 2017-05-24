@@ -15,134 +15,110 @@
 
         <ui:define name="body">
             <h:form id="VehiculeListForm">
-                <p:panel header="#{bundle.ListVehiculeTitle}">
-                    <p:dataTable id="datalist" value="#{vehiculeController.items}" var="item"
-                                 selectionMode="single" selection="#{vehiculeController.selected}"
-                                 paginator="true"
-                                 rowKey="#{item.matricule}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
-                                 >
+                 <p:panelGrid columns="8" rendered="#{vehiculeController.selected != null}" style="margin-left: 15%">
+                        <p:outputLabel value="Etat" for="etat" />
+                        <p:selectOneMenu id="etat" value="#{vehiculeController.etat}" >
+                            <f:selectItem itemLabel="--SELECT--"  />
+                            <f:selectItem itemLabel="Disponible" itemValue="1" />
+                            <f:selectItem itemLabel="Indisponible" itemValue="0" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateVehiculeLabel_modele}" for="modele" />
+                        <p:inputText id="modele" value="#{vehiculeController.modele}" title="#{bundle.CreateVehiculeTitle_modele}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculeLabel_marque}" for="marque" />
+                        <p:inputText id="marque" value="#{vehiculeController.marque}" title="#{bundle.CreateVehiculeTitle_marque}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculeLabel_categorie}" for="categorie" />
+                        <p:inputText id="categorie" value="#{vehiculeController.categorie}" title="#{bundle.CreateVehiculeTitle_categorie}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculeLabel_carburant}" for="carburant" />
+                        <p:inputText id="carburant" value="#{vehiculeController.carburant}" title="#{bundle.CreateVehiculeTitle_carburant}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculeLabel_nombrePlace}" for="nombrePlace" />
+                        <p:inputText id="nombrePlace" value="#{vehiculeController.nombrePlace}" title="#{bundle.CreateVehiculeTitle_nombrePlace}" />
+                        <p:outputLabel value="PrixMin" for="prixMin" />
+                        <p:inputText id="prixMin" value="#{vehiculeController.prixMin}" title="#{bundle.CreateVehiculeTitle_prixParJour}" />
+                        <p:outputLabel value="PrixMax" for="prixMax" />
+                        <p:inputText id="prixMax" value="#{vehiculeController.prixMax}" title="#{bundle.CreateVehiculeTitle_prixParJour}" />
+                    </p:panelGrid>
+                <p:commandButton actionListener="#{vehiculeController.searchAdmin()}" value="Search" update=":VehiculeListForm:datalist" style="margin-left: 50%"/><br></br>
+                   
+                <p:dataTable id="datalist" value="#{vehiculeController.items}" var="item"
+                             selectionMode="single" selection="#{vehiculeController.selected}"
+                             paginator="true"
+                             rowKey="#{item.matricule}"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             >
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                    <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                    <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVehiculeTitle_path}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.path}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVehiculeTitle_matricule}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.matricule}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVehiculeTitle_modele}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.modele}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVehiculeTitle_marque}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.marque}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVehiculeTitle_categorie}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.categorie}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVehiculeTitle_carburant}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.carburant}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVehiculeTitle_couleur}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.couleur}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVehiculeTitle_nombrePlace}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.nombrePlace}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVehiculeTitle_km}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.km}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVehiculeTitle_prixParJour}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.prixParJour}"/>
-                        </p:column>
-                        <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{vehiculeController.prepareCreate}" update=":VehiculeCreateForm" oncomplete="PF('VehiculeCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":VehiculeViewForm" oncomplete="PF('VehiculeViewDialog').show()" disabled="#{empty vehiculeController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":VehiculeEditForm" oncomplete="PF('VehiculeEditDialog').show()" disabled="#{empty vehiculeController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{vehiculeController.destroy}" update=":growl,datalist" disabled="#{empty vehiculeController.selected}"/>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListVehiculeTitle_path}"/>
                         </f:facet>
-                    </p:dataTable>
-                </p:panel>
-            </h:form>
-
-            <h:form id="form">
-                <p:dataGrid var="car" value="#{dataGridView.cars}" columns="3" layout="grid"
-                            rows="12" paginator="true" id="cars"
-                            paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                            rowsPerPageTemplate="6,12,16">
-
-                    <f:facet name="header">
-                        Cars for Sale
+                        <h:outputText value="#{item.path}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListVehiculeTitle_matricule}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.matricule}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListVehiculeTitle_modele}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.modele}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListVehiculeTitle_marque}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.marque}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListVehiculeTitle_categorie}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.categorie}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListVehiculeTitle_carburant}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.carburant}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListVehiculeTitle_couleur}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.couleur}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListVehiculeTitle_nombrePlace}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nombrePlace}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListVehiculeTitle_km}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.km}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListVehiculeTitle_prixParJour} et Action"/>
+                        </f:facet>
+                        <p:commandButton value="Reserver" update="datalist" actionListener="#{reservationController.reserver(item)}"/><br></br>
+                        <h:outputText value="#{item.prixParJour}"/>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton value="valider" actionListener="#{reservationController.save()}" update="datalist"/>
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{vehiculeController.prepareCreate}" update=":VehiculeCreateForm" oncomplete="PF('VehiculeCreateDialog').show()"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":VehiculeViewForm" oncomplete="PF('VehiculeViewDialog').show()" disabled="#{empty vehiculeController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":VehiculeEditForm" oncomplete="PF('VehiculeEditDialog').show()" disabled="#{empty vehiculeController.selected}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{vehiculeController.destroy}" update=":growl,datalist" disabled="#{empty vehiculeController.selected}"/>
                     </f:facet>
-
-                    <p:panel header="#{car.modele}" style="text-align:center">
-                        <h:panelGrid columns="1" style="width:100%">
-                            <p:graphicImage name="../resources/images/#{car.path}"/> 
-
-                            <h:outputText value="#{car.modele}" />
-
-                            <p:commandLink update=":form:carDetail" oncomplete="PF('carDialog').show()" title="View Detail">
-                                <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />
-                                <f:setPropertyActionListener value="#{car}" target="#{dataGridView.selectedCar}" />
-                            </p:commandLink>
-                        </h:panelGrid>
-                    </p:panel>
-
-                </p:dataGrid>
-
-                <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-                    <p:outputPanel id="carDetail" style="text-align:center;">
-                        <p:panelGrid  columns="2" rendered="#{not empty dataGridView.selectedCar}" columnClasses="label,value">
-                            <f:facet name="header">
-                                <p:graphicImage name="../resources/images/#{dataGridView.selectedCar.path}"/> 
-                            </f:facet>
-
-                            <h:outputText value="Carburant:" />
-                            <h:outputText value="#{dataGridView.selectedCar.carburant}" />
-
-                            <h:outputText value="Year" />
-                            <h:outputText value="#{dataGridView.selectedCar.categorie}" />
-
-                            <h:outputText value="KM" />
-                            <h:outputText value="#{dataGridView.selectedCar.km}" style="color:#{dataGridView.selectedCar.couleur}"/>
-
-                            <h:outputText value="Price" />
-                            <h:outputText value="$#{dataGridView.selectedCar.prixParJour}" />
-                        </p:panelGrid>
-                    </p:outputPanel>
-                </p:dialog>
+                </p:dataTable>
             </h:form>
 
             <ui:include src="Create.xhtml"/>

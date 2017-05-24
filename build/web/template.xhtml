@@ -19,14 +19,17 @@
                 <h:form id="menuForm">
                     <p:menubar>
                         <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home" style="width: 100px;" />
-                        <p:menuitem value="Client" outcome="/client/List.xhtml" style="width: 100px;" />
+                        <p:menuitem value="Clients" outcome="/client/List.xhtml" style="width: 100px;" />
                         <p:menuitem value="Voitures" outcome="/vehicule/List.xhtml" style="width: 100px;"  />
                         <p:menuitem value="Contact" outcome="/contact/List.xhtml" style="width: 100px;"  />
-                        <p:menuitem value="Manager" outcome="/manager/List.xhtml" style="width: 100px;"  />
-                        <p:menuitem value="Pays" outcome="/pays/List.xhtml" style="width: 100px;"  />
+                        <p:menuitem value="Managers" rendered="#{managerController.connectedManager.admin==false}" outcome="/manager/List.xhtml" style="width: 100px;"  />
                         <p:menuitem value="Reservation" outcome="/reservation/List.xhtml" style="width: 100px;"  />
-                        <p:menuitem value="Etat Lieu" outcome="/etatLieu/List.xhtml" style="width: 100px;"  />
-                        <p:menuitem value="Composant de voiture" outcome="/composantVoiture/List.xhtml" style="width: 170px;"  />
+                        <p:menuitem value="Location" outcome="/location/List.xhtml" style="width: 100px;"  />
+                        <p:menuitem value="Agences" rendered="#{managerController.connectedManager.admin==false}"  outcome="/agence/List.xhtml" style="width: 100px;"  />
+                        <p:menuitem value="Etats Lieu" outcome="/etatLieu/List.xhtml" style="width: 100px;"  />
+                        <p:menuitem value="Composants de voiture" outcome="/composantVoiture/List.xhtml" style="width: 150px;"  />
+                        <p:menuitem icon="ui-icon-trash" action="#{managerController.deconnecter()}" value="LOG OUT" style="width: 100px;"  />
+                        <p:menuitem  action="#{managerController.gotToProfile(connectedManager)}" value="Hi! #{managerController.connectedManager.nom}" style="width: 100px;"  />
                     </p:menubar>
                 </h:form>
             </p:layoutUnit>

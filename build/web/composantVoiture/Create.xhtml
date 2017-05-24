@@ -14,8 +14,6 @@
                     <p:panelGrid columns="2" rendered="#{composantVoitureController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateComposantVoitureLabel_nom}" for="nom" />
                         <p:inputText id="nom" value="#{composantVoitureController.selected.nom}" title="#{bundle.CreateComposantVoitureTitle_nom}" />
-                        <p:outputLabel value="#{bundle.CreateComposantVoitureLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{composantVoitureController.selected.id}" title="#{bundle.CreateComposantVoitureTitle_id}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{composantVoitureController.create}" value="#{bundle.Save}" update="display,:ComposantVoitureListForm:datalist,:growl" oncomplete="handleSubmit(args,'ComposantVoitureCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ComposantVoitureCreateDialog.hide()"/>
